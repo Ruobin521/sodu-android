@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_main_tab_bottom"
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:layout_alignParentBottom="true"
+    android:background="#FCFCFC" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/id_tab_bottom_onlineShelf"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_onlineshelf"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/tabbar_online_shelf"
+                android:clickable="false"
+              />
+
+            <TextView
+                android:id="@+id/txt_tab_bottom_onlineshelf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tabText"
+                android:textSize="@dimen/tabbar_text_size"
+                android:text="在线书架" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_tab_bottom_rank"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_rank"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/tabbar_rank"
+                android:clickable="false"
+                  />
+
+            <TextView
+                android:id="@+id/txt_tab_bottom_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tabText"
+                android:textSize="@dimen/tabbar_text_size"
+                android:text="排行榜" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_tab_bottom_hotrecommend"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_hotrecommend"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/tabbar_hot"
+                android:clickable="false"
+                  />
+
+            <TextView
+                android:id="@+id/txt_tab_bottom_hotrecommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tabText"
+                android:textSize="@dimen/tabbar_text_size"
+                android:text="热门推荐" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_tab_bottom_localshelf"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_localshelf"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/tabbar_local_shelf"
+                android:clickable="false"
+                />
+
+            <TextView
+                android:id="@+id/txt_tab_bottom_localshelf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tabText"
+                android:textSize="@dimen/tabbar_text_size"
+                android:text="本地书架" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_tab_bottom_setting"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_setting"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/tabbar_setting"
+                android:clickable="false"
+                 />
+
+            <TextView
+                android:id="@+id/txt_tab_bottom_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tabText"
+                android:textSize="@dimen/tabbar_text_size"
+                android:text="设置" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">小说搜索阅读</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="tab_title_online_shelf">在线书架</string>
+    <string name="tab_title_rank">排行榜</string>
+    <string name="tab_title_hot">热门推荐</string>
+    <string name="tab_title_local_shelf">本地书架</string>
+    <string name="tab_title_setting">设置</string>
+
+</resources>

@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/tabTextHighLight">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="@string/tab_title_hot"
+            android:textColor="#fff"
+            android:textSize="@dimen/title_text_size" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+
+        <TextView
+            android:id="@+id/txt_rank_content_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="center_vertical"
+            android:text="热门"
+            android:textColor="#000"
+            android:textSize="24dp" />
+    </FrameLayout>
+
+
+</LinearLayout>
