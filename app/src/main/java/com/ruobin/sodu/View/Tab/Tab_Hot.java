@@ -1,38 +1,41 @@
-package com.ruobin.sodu;
+package com.ruobin.sodu.View.Tab;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ruobin.sodu.URL.SoDuUrl;
+import com.ruobin.sodu.R;
+import com.ruobin.sodu.Constants.SoDuUrl;
+import com.ruobin.sodu.Interface.IHtmlRequestResult;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Tab_LocalShelf.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Tab_LocalShelf#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Tab_LocalShelf extends BaseTabFragment {
+public class Tab_Hot extends BaseTabFragment {
+
+    private  String html;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("aa===","Tab_LocalShelf销毁");
+        Log.d("aa===","hot销毁");
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         if (currentView == null) {
-            currentView = inflater.inflate(R.layout.fragment_tab_local_shelf, container, false);
+            currentView = inflater.inflate(R.layout.fragment_tab_hot, container, false);
             //在这里做一些初始化处理
 
         } else {
@@ -43,14 +46,41 @@ public class Tab_LocalShelf extends BaseTabFragment {
         return currentView;
     }
 
+
     @Override
     public void onFragmentVisible() {
 
+        if(html != null) {
+
+            return;
+        }
         if (!ifNeedLoadData()) {
             return;
         }
 
+        String rankUrl = SoDuUrl.home;
+        loadData(rankUrl);
     }
+
+
+    @Override
+    public void loadData(String url) {
+
+        getHtmlByUrl(url, new IHtmlRequestResult() {
+            @Override
+            public void success(String html) {
+                setData(html);
+            }
+
+            @Override
+            public void error() {
+                onRequestFailure();
+            }
+        });
+
+    }
+
+
 
     @Override
     public void onFragmentUnVisible() {
@@ -63,6 +93,7 @@ public class Tab_LocalShelf extends BaseTabFragment {
         TextView txt = (TextView) this.getView().findViewById(R.id.txt_rank_content_hot);
         txt.setText(html);
 
+        this.html = html;
     }
 
 
@@ -86,8 +117,6 @@ public class Tab_LocalShelf extends BaseTabFragment {
     public void itemInitData(View view, Object item) {
 
     }
-
-
 
 
 }

@@ -1,10 +1,11 @@
-package com.ruobin.sodu;
+package com.ruobin.sodu.View.Tab;
 
 import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.Util.HttpHelper;
+import com.ruobin.sodu.Interface.IHtmlRequestResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public abstract class BaseTabFragment extends Fragment {
         }
     }
 
-    public void loadData(String url) {
+    public void getHtmlByUrl(String url, final IHtmlRequestResult result) {
 
         HttpHelper.getMethod(url, new Callback<ResponseBody>() {
             @Override
@@ -46,20 +47,21 @@ public abstract class BaseTabFragment extends Fragment {
                 try {
 
                     String html = response.body().string();
-                    setData(html);
+                    result.success(html);
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    result.error();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                onRequestFailure();
+                result.error();
             }
         });
     }
+
 
 
     //检测是否需要加载数据
@@ -72,17 +74,21 @@ public abstract class BaseTabFragment extends Fragment {
     }
 
 
+    //获取数据失败时
+    public  void onRequestFailure() {};
+
+    //当fragment隐藏时
+    public  void onFragmentUnVisible() { };
+
+
     //当fragment显示时
     public abstract void onFragmentVisible();
 
-    //当fragment隐藏时
-    public abstract void onFragmentUnVisible();
+    //获取数据
+    public abstract void loadData(String url);
 
     //设置页面数据方法
     public abstract void setData(String html);
-
-    //获取数据失败时
-    public abstract void onRequestFailure();
 
     //点击
     public abstract void itemClick(View view, int position);

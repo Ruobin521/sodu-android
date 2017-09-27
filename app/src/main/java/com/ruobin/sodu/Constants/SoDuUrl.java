@@ -1,4 +1,4 @@
-package com.ruobin.sodu.URL;
+package com.ruobin.sodu.Constants;
 
 /**
  * Created by ruobin on 2017/9/26.
