@@ -10,6 +10,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ruobin.sodu.View.Tab.Tab_Hot;
+import com.ruobin.sodu.View.Tab.Tab_LocalShelf;
+import com.ruobin.sodu.View.Tab.Tab_OnlineShelf;
+import com.ruobin.sodu.View.Tab.Tab_Rank;
+import com.ruobin.sodu.View.Tab.Tab_Setting;
+
 import java.util.ArrayList;
 import java.util.List;
 

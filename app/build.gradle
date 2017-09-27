@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.ruobin.sodu"
@@ -26,4 +26,5 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
 }

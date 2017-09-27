@@ -24,7 +24,7 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        >
+        android:background="@color/tabFragmentBackColor"   >
 
         <TextView
             android:id="@+id/txt_rank_content_online_shelft"
