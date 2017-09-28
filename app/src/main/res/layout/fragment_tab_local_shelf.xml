@@ -20,5 +20,6 @@
         />
     </FrameLayout>
 
+    <include layout="@layout/refresh_recycler_view" />
 
 </LinearLayout>

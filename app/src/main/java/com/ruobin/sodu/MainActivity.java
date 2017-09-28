@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -41,7 +43,7 @@ public class MainActivity extends FragmentActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
 
-       // mViewPager.setOffscreenPageLimit(5);
+        // mViewPager.setOffscreenPageLimit(5);
 
         initView();
 
@@ -122,11 +124,11 @@ public class MainActivity extends FragmentActivity {
         mTabBtnLocalShelf = (LinearLayout) findViewById(R.id.id_tab_bottom_localshelf);
         mTabBtnSetting = (LinearLayout) findViewById(R.id.id_tab_bottom_setting);
 
-        Tab_OnlineShelf online_shelf = new Tab_OnlineShelf();
-        Tab_Rank rank = new Tab_Rank();
-        Tab_Hot hot = new Tab_Hot();
-        Tab_LocalShelf local_shelf = new Tab_LocalShelf();
-        Tab_Setting setting = new Tab_Setting();
+        final Tab_OnlineShelf online_shelf = new Tab_OnlineShelf();
+        final Tab_Rank rank = new Tab_Rank();
+        final Tab_Hot hot = new Tab_Hot();
+        final Tab_LocalShelf local_shelf = new Tab_LocalShelf();
+        final Tab_Setting setting = new Tab_Setting();
 
 
         mFragments.add(online_shelf);
@@ -145,10 +147,37 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
+
+        mTabBtnOnlineShelf.setOnTouchListener(new onDoubleClick() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                boolean result = super.onTouch(v, event);
+
+                Log.d("===", String.valueOf(result));
+                if (result) {
+                    online_shelf.scrollToTop();
+                }
+                return false;
+            }
+        });
+
         mTabBtnRank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mViewPager.setCurrentItem(1, false);
+            }
+        });
+
+        mTabBtnRank.setOnTouchListener(new onDoubleClick() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                boolean result = super.onTouch(v, event);
+
+                Log.d("===", String.valueOf(result));
+                if (result) {
+                    rank.scrollToTop();
+                }
+                return false;
             }
         });
 
@@ -159,12 +188,37 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
+        mTabBtnHot.setOnTouchListener(new onDoubleClick() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                boolean result = super.onTouch(v, event);
+
+                Log.d("===", String.valueOf(result));
+                if (result) {
+                    hot.scrollToTop();
+                }
+                return false;
+            }
+        });
+
         mTabBtnLocalShelf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mViewPager.setCurrentItem(3, false);
             }
         });
+
+        mTabBtnLocalShelf.setOnTouchListener(new onDoubleClick() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                boolean result = super.onTouch(v, event);
+                if (result) {
+                    local_shelf.scrollToTop();
+                }
+                return false;
+            }
+        });
+
 
         mTabBtnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +228,7 @@ public class MainActivity extends FragmentActivity {
         });
 
     }
+
 
     private void setTabBtnHighlight(LinearLayout parent, int imgBtnId, int txtId, int hightLightImgId) {
 
@@ -188,6 +243,36 @@ public class MainActivity extends FragmentActivity {
     }
 
 
+    class onDoubleClick implements View.OnTouchListener {
+
+        int count;
+        long firClick;
+        long secClick;
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (MotionEvent.ACTION_DOWN == event.getAction()) {
+                count++;
+
+                if (count == 1) {
+                    firClick = System.currentTimeMillis();
+                } else if (count == 2) {
+                    secClick = System.currentTimeMillis();
+                    if (secClick - firClick < 1000) {
+                        count = 0;
+                        firClick = 0;
+                        secClick = 0;
+                        return true;
+                    }else{
+                        count = 0;
+                        secClick = 0;
+                        firClick = secClick;
+                    }
+                }
+            }
+            return false;
+        }
+    }
 }
 
 

@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ruobin.sodu.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +15,15 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
 
     private List<T> mData;
 
-    private CustomRecyclerAdapter.ItemActionListener   onItemActionListener;
+    private int itemViewId;
+
+    private CustomRecyclerAdapter.ItemActionListener onItemActionListener;
 
 
-    public CustomRecyclerAdapter(List<T> data) {
+    public CustomRecyclerAdapter(List<T> data,int id) {
 
         mData = data;
+        itemViewId = id;
     }
 
     public void updateData(List<T> data) {
@@ -34,10 +35,10 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
      * 添加新的Item
      */
     public void addNewItem(T item) {
-        if(mData == null) {
+        if (mData == null) {
             mData = new ArrayList<>();
         }
-        mData.add(0, item );
+        mData.add(0, item);
         notifyItemInserted(0);
     }
 
@@ -45,7 +46,7 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
      * 删除Item
      */
     public void deleteItem(T item) {
-        if(mData == null || mData.isEmpty()) {
+        if (mData == null || mData.isEmpty()) {
             return;
         }
 
@@ -57,7 +58,7 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
     @Override
     public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rank, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(itemViewId, parent, false);
         ListViewHolder holder = new ListViewHolder(view);
         return holder;
     }
@@ -66,14 +67,14 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
     public void onBindViewHolder(final ListViewHolder holder, int position) {
         T data = mData.get(position);
 
-        if(onItemActionListener != null) {
-            onItemActionListener.onItemInitData(holder.itemView,data);
+        if (onItemActionListener != null) {
+            onItemActionListener.onItemInitData(holder.itemView, data);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if(onItemActionListener != null) {
+                if (onItemActionListener != null) {
                     int pos = holder.getLayoutPosition();
                     onItemActionListener.onItemClick(holder.itemView, pos);
                 }
@@ -83,7 +84,7 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(onItemActionListener != null) {
+                if (onItemActionListener != null) {
                     int pos = holder.getLayoutPosition();
                     onItemActionListener.onItemLongClick(holder.itemView, pos);
                 }
@@ -102,15 +103,16 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
     @Override
     public int getItemCount() {
 
-        if(mData == null){
-            return  0;
+        if (mData == null) {
+            return 0;
         }
         return mData.size();
     }
 
-   public static class ListViewHolder extends RecyclerView.ViewHolder {
-       View itemView;
-        public ListViewHolder(View view ) {
+    public static class ListViewHolder extends RecyclerView.ViewHolder {
+        View itemView;
+
+        public ListViewHolder(View view) {
             super(view);
             itemView = view;
         }
@@ -119,7 +121,9 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
     public interface ItemActionListener {
 
         void onItemClick(View view, int position);
+
         void onItemLongClick(View view, int position);
+
         void onItemInitData(View view, Object item);
 
     }

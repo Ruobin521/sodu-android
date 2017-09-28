@@ -21,21 +21,7 @@
         />
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@color/tabFragmentBackColor"   >
-
-        <TextView
-            android:id="@+id/txt_rank_content_online_shelft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:gravity="center_vertical"
-            android:text="ceshi"
-            android:textColor="#000"
-            android:textSize="24dp" />
-    </FrameLayout>
+    <include layout="@layout/refresh_recycler_view" />
 
 
 </LinearLayout>
