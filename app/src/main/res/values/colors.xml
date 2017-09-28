@@ -6,6 +6,8 @@
     <color name="tabTextHighLight">#007aff</color>
     <color name="tabFragmentBackColor">#00000000</color>
     <color name="tabListItemBackColor">#FFF</color>
+    <color name="item_rank_txt_light">#777</color>
+
 
 
     <color name="colorPrimary">#007aff</color>

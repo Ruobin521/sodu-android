@@ -1,17 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="wrap_content"
     android:background="@color/tabListItemBackColor"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingTop="6dp">
 
     <TextView
-        android:id="@+id/item_rank_txt"
+        android:id="@+id/item_rank_name"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
         android:gravity="center"
-        android:layout_gravity="center"
-        android:textSize="30sp"
-        android:text="ceshi"/>
+        android:text="雪鹰领主"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="23sp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:textColor="@color/item_rank_txt_light"
+            android:text="最新章节:"
+            android:textSize="18sp"
+            android:textStyle=""/>
+
+        <TextView
+            android:id="@+id/item_rank_catalog_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/item_rank_txt_light"
+            android:text="第三十五章 测首名称"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="更新时间:"
+            android:textColor="@color/item_rank_txt_light"
+            android:textSize="18sp"
+            android:textStyle=""/>
+
+        <TextView
+            android:id="@+id/item_rank_update_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="2017/8/8 12:12:00"
+            android:textColor="@color/item_rank_txt_light"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

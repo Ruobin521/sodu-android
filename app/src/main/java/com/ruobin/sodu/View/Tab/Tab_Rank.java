@@ -29,7 +29,6 @@ public class Tab_Rank extends BaseTabFragment {
 
     @Override
     public void loadData() {
-
         super.loadData();
         String url = SoDuUrl.rank;
 
@@ -45,7 +44,6 @@ public class Tab_Rank extends BaseTabFragment {
             }
         });
     }
-
 
 
     @Override
@@ -75,9 +73,11 @@ public class Tab_Rank extends BaseTabFragment {
     @Override
     public void itemInitData(View view, Object item) {
 
-        TextView tv = (TextView) view.findViewById(R.id.item_rank_txt);
+        TextView tv = (TextView) view.findViewById(R.id.item_rank_name);
         tv.setText(((Book) item).BookName);
 
+        TextView tv2 = (TextView) view.findViewById(R.id.item_rank_catalog_name);
+        tv2.setText(((Book) item).NewestCatalogName);
     }
 
     @Override
