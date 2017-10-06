@@ -11,6 +11,11 @@ public class SoDuUrl {
     //排行榜
     public static String rank = "http://www.sodu.cc/top.html";
 
+    public static String getRankByIndex(int index) {
+
+        return "http://www.sodu.cc/top_"+index+".html";
+    }
+
     //登录页面
     public static String loginPostPage = "http://www.sodu.cc/handler/login.html";
 

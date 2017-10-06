@@ -8,23 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.R;
 import com.ruobin.sodu.Util.CustomRecyclerAdapter;
 import com.ruobin.sodu.Util.DividerItemDecoration;
-import com.ruobin.sodu.Util.HttpHelper;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by ruobin on 2017/9/26.
@@ -42,16 +35,19 @@ public abstract class BaseTabFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
 
-    private RefreshLayout refreshLayout;
+    public RefreshLayout refreshLayout;
 
     private CustomRecyclerAdapter<Book> mAdapter;
 
     private int tabId;
     private int listItemId;
 
-    public void setId(int tab, int listItem) {
+    private boolean isNeeLoadMore;
+
+    public void setId(int tab, int listItem, Boolean loadMore) {
         tabId = tab;
         listItemId = listItem;
+        isNeeLoadMore = loadMore;
     }
 
     @Override
@@ -64,6 +60,7 @@ public abstract class BaseTabFragment extends Fragment {
             //在这里做一些初始化处理
             initRefreshView();
             initRecylerView();
+            initUI();
 
         } else {
 
@@ -83,9 +80,16 @@ public abstract class BaseTabFragment extends Fragment {
     }
 
 
+    public  void initUI() {
+
+
+    }
+
     protected void initRefreshView() {
 
         refreshLayout = (RefreshLayout) currentView.findViewById(R.id.refreshLayout);
+        refreshLayout.setEnableLoadmore(isNeeLoadMore);
+
 //        //设置 Header 为 Material风格
 //        refreshLayout.setRefreshHeader(new ClassicsHeader(this.getContext()));
 //        //设置 Footer 为 球脉冲
@@ -96,7 +100,7 @@ public abstract class BaseTabFragment extends Fragment {
             public void onRefresh(RefreshLayout refreshlayout) {
                 loadData();
                 //Toast.makeText(currentView.getContext(), "下拉刷新", Toast.LENGTH_SHORT).show();
-              //  refreshlayout.finishRefresh(30);
+                //  refreshlayout.finishRefresh(30);
             }
         });
 
@@ -105,10 +109,11 @@ public abstract class BaseTabFragment extends Fragment {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
 
-                loadData();
-             //   Toast.makeText(currentView.getContext(), "上拉加载", Toast.LENGTH_SHORT).show();
+                loadMoreData();
+                //   Toast.makeText(currentView.getContext(), "上拉加载", Toast.LENGTH_SHORT).show();
             }
         });
+
 
     }
 
@@ -142,35 +147,12 @@ public abstract class BaseTabFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        isVisible= isVisibleToUser;
+        isVisible = isVisibleToUser;
         if (isVisibleToUser && ifNeedLoadData() && !isLoading) {
             if (refreshLayout != null) {
                 refreshLayout.autoRefresh();
             }
         }
-    }
-
-    public void getHtmlByUrl(String url, final IHtmlRequestResult result) {
-
-        HttpHelper.getMethod(url, new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-
-                    String html = response.body().string();
-                    result.success(html);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    result.error();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                result.error();
-            }
-        });
     }
 
 
@@ -185,20 +167,44 @@ public abstract class BaseTabFragment extends Fragment {
     //设置页面数据方法
     public void setData(String html) {
 
-        mAdapter.updateData(books);
-        refreshLayout.finishRefresh(30);
+
     }
 
 
-    public final  void scrollToTop(){
+    public  void updateUI(){
 
-        if(books!= null){
-            mRecyclerView.smoothScrollToPosition(0);
+        if (books != null && books.size() > 0) {
+            mAdapter.updateData(books);
+        }
+        endLoad();
+    }
+
+
+    public void endLoad() {
+
+        refreshLayout.finishRefresh(0);
+        refreshLayout.finishLoadmore(0);
+    }
+
+
+    public final void scrollToTop() {
+
+        if (books != null && books.size() > 7) {
+            if (mRecyclerView.computeVerticalScrollOffset() > 0) {
+                mRecyclerView.scrollToPosition(6);
+                mRecyclerView.smoothScrollToPosition(0);
+            }
         }
     }
 
     //获取数据失败时
     public void onRequestFailure() {
+
+        if (books == null || books.size() == 0) {
+            this.getView().findViewById(R.id.refresh_error).setVisibility(View.VISIBLE);
+        }
+
+        endLoad();
     }
 
 
@@ -220,8 +226,7 @@ public abstract class BaseTabFragment extends Fragment {
 
     //获取数据
     public void loadMoreData() {
-        isLoading = true;
-        refreshLayout.finishLoadmore(30);
+
     }
 
 

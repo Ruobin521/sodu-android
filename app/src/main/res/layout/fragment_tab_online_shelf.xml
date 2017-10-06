@@ -2,24 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/tabTextHighLight">
 
         <TextView
+            android:id="@+id/tab_online_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:text="@string/tab_title_online_shelf"
             android:textColor="#fff"
             android:textSize="@dimen/title_text_size" />
         />
-    </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/search"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="全标已读"
+            android:textColor="#fff"
+            android:textSize="17sp"
+            android:background="@color/transparent"/>
+
+    </RelativeLayout>
 
     <include layout="@layout/refresh_recycler_view" />
 

@@ -1,11 +1,12 @@
 package com.ruobin.sodu.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ruobin on 2017/9/26.
  */
-public class Book {
+public class Book implements Serializable {
 
     public int Id;
 

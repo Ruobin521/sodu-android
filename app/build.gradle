@@ -27,4 +27,5 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    compile 'com.google.code.gson:gson:2.8.2'
 }

@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ruobin.sodu.Util.OnDoubleClick;
 import com.ruobin.sodu.View.Tab.Tab_Hot;
 import com.ruobin.sodu.View.Tab.Tab_LocalShelf;
 import com.ruobin.sodu.View.Tab.Tab_OnlineShelf;
@@ -27,19 +29,16 @@ public class MainActivity extends FragmentActivity {
     private FragmentStatePagerAdapter mAdapter;
     private List<Fragment> mFragments = new ArrayList<Fragment>();
 
-
     private LinearLayout mTabBtnOnlineShelf;
     private LinearLayout mTabBtnRank;
     private LinearLayout mTabBtnHot;
     private LinearLayout mTabBtnLocalShelf;
     private LinearLayout mTabBtnSetting;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
 
@@ -115,7 +114,6 @@ public class MainActivity extends FragmentActivity {
         setTabBtnNormal(mTabBtnSetting, R.id.btn_tab_bottom_setting, R.id.txt_tab_bottom_setting, R.drawable.tabbar_setting);
     }
 
-
     private void initView() {
 
         mTabBtnOnlineShelf = (LinearLayout) findViewById(R.id.id_tab_bottom_onlineShelf);
@@ -148,12 +146,11 @@ public class MainActivity extends FragmentActivity {
         });
 
 
-        mTabBtnOnlineShelf.setOnTouchListener(new onDoubleClick() {
+        mTabBtnOnlineShelf.setOnTouchListener(new OnDoubleClick() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 boolean result = super.onTouch(v, event);
 
-                Log.d("===", String.valueOf(result));
                 if (result) {
                     online_shelf.scrollToTop();
                 }
@@ -168,12 +165,11 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        mTabBtnRank.setOnTouchListener(new onDoubleClick() {
+        mTabBtnRank.setOnTouchListener(new OnDoubleClick() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 boolean result = super.onTouch(v, event);
 
-                Log.d("===", String.valueOf(result));
                 if (result) {
                     rank.scrollToTop();
                 }
@@ -188,7 +184,7 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        mTabBtnHot.setOnTouchListener(new onDoubleClick() {
+        mTabBtnHot.setOnTouchListener(new OnDoubleClick() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 boolean result = super.onTouch(v, event);
@@ -208,7 +204,7 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        mTabBtnLocalShelf.setOnTouchListener(new onDoubleClick() {
+        mTabBtnLocalShelf.setOnTouchListener(new OnDoubleClick() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 boolean result = super.onTouch(v, event);
@@ -229,7 +225,6 @@ public class MainActivity extends FragmentActivity {
 
     }
 
-
     private void setTabBtnHighlight(LinearLayout parent, int imgBtnId, int txtId, int hightLightImgId) {
 
         ((ImageButton) parent.findViewById(imgBtnId)).setBackground(getResources().getDrawable(hightLightImgId));
@@ -242,37 +237,30 @@ public class MainActivity extends FragmentActivity {
         ((TextView) parent.findViewById(txtId)).setTextColor(getResources().getColor(R.color.tabText));
     }
 
+    @Override
+    public void onBackPressed() {
+        showQuitTips();
+    }
 
-    class onDoubleClick implements View.OnTouchListener {
+    // 记录第一次按下的时间
+    private long firstPressTime = -1;
+    // 记录第二次按下的时间
+    private long lastPressTime;
+    // 两次按下的时间间隔
+    private final long INTERVAL = 2000;
 
-        int count;
-        long firClick;
-        long secClick;
+    private void showQuitTips() {
 
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (MotionEvent.ACTION_DOWN == event.getAction()) {
-                count++;
-
-                if (count == 1) {
-                    firClick = System.currentTimeMillis();
-                } else if (count == 2) {
-                    secClick = System.currentTimeMillis();
-                    if (secClick - firClick < 1000) {
-                        count = 0;
-                        firClick = 0;
-                        secClick = 0;
-                        return true;
-                    }else{
-                        count = 0;
-                        secClick = 0;
-                        firClick = secClick;
-                    }
-                }
-            }
-            return false;
+        lastPressTime = System.currentTimeMillis();
+        if (lastPressTime - firstPressTime <= INTERVAL) {
+            System.exit(0);
+        } else {
+            firstPressTime = lastPressTime;
+            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
 
 

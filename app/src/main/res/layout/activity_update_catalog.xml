@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".View.Tab.Tab_Rank">
+    tools:context="com.ruobin.sodu.UpdateCatalogActivity"
+    android:background="@color/main_back_color"
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -11,17 +13,14 @@
         android:background="@color/tabTextHighLight">
 
         <TextView
-            android:id="@+id/tab_rank_title"
+            android:id="@+id/header_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:text="@string/tab_title_rank"
             android:textColor="#fff"
             android:textSize="@dimen/title_text_size" />
     </FrameLayout>
 
-    <include layout="@layout/refresh_recycler_view"/>
-
-
+    <include layout="@layout/refresh_recycler_view" />
 </LinearLayout>

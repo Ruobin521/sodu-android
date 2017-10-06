@@ -7,6 +7,7 @@ import android.view.View;
 import com.ruobin.sodu.Constants.SoDuUrl;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.R;
+import com.ruobin.sodu.Util.HttpHelper;
 
 
 public class Tab_LocalShelf extends BaseTabFragment {
@@ -14,7 +15,7 @@ public class Tab_LocalShelf extends BaseTabFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setId(R.layout.fragment_tab_local_shelf,R.layout.item_rank);
+        super.setId(R.layout.fragment_tab_local_shelf,R.layout.item_rank,false);
     }
 
 
@@ -36,7 +37,7 @@ public class Tab_LocalShelf extends BaseTabFragment {
     public void loadData() {
 
         String url = SoDuUrl.home;
-        getHtmlByUrl(url, new IHtmlRequestResult() {
+        HttpHelper.getHtmlByUrl(url, new IHtmlRequestResult() {
             @Override
             public void success(String html) {
                 setData(html);

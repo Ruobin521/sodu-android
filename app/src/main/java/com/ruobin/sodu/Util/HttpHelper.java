@@ -1,7 +1,11 @@
 package com.ruobin.sodu.Util;
 
+import com.ruobin.sodu.Interface.IHtmlRequestResult;
+import com.ruobin.sodu.MyApplication;
+
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -9,6 +13,7 @@ import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
@@ -50,7 +55,13 @@ public class HttpHelper {
 
 
     public static OkHttpClient genericClient() {
-        OkHttpClient httpClient = new OkHttpClient.Builder()
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.addInterceptor(new AddCookiesInterceptor(MyApplication.getContextObject()));
+        builder.addInterceptor(new SaveCookiesInterceptor(MyApplication.getContextObject()));
+        builder.connectTimeout(12, TimeUnit.SECONDS);
+
+        OkHttpClient httpClient = builder
                 .addInterceptor(new Interceptor() {
                     @Override
                     public okhttp3.Response intercept(Chain chain) throws IOException {
@@ -62,7 +73,6 @@ public class HttpHelper {
                                 .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
                                 .addHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6")
                                 .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
-                                .addHeader("Cookie", "sodu_user=iUtPHS0jQNCLWt3WQ0ozqw==;")
                                 .build();
                         return chain.proceed(request);
                     }
@@ -73,6 +83,52 @@ public class HttpHelper {
         return httpClient;
     }
 
+    public static void getHtmlByUrl(String url, final IHtmlRequestResult result) {
+
+        HttpHelper.getMethod(url, new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+
+                    String html = response.body().string();
+                    result.success(html);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    result.error();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                result.error();
+            }
+        });
+    }
+
+    public static void getPostData(String url, Map<String, String> map, final IHtmlRequestResult result) {
+
+
+        HttpHelper.postMethod(url, map, new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+
+                    String html = response.body().string();
+                    result.success(html);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    result.error();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                result.error();
+            }
+        });
+    }
 }
 
 
