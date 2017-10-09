@@ -201,7 +201,7 @@ public abstract class BaseTabFragment extends Fragment {
     public void onRequestFailure() {
 
         if (books == null || books.size() == 0) {
-            this.getView().findViewById(R.id.refresh_error).setVisibility(View.VISIBLE);
+            setErrorViewVisibility(true);
         }
 
         endLoad();
@@ -222,6 +222,7 @@ public abstract class BaseTabFragment extends Fragment {
     //获取数据
     public void loadData() {
         isLoading = true;
+        setErrorViewVisibility(false);
     }
 
     //获取数据
@@ -229,6 +230,17 @@ public abstract class BaseTabFragment extends Fragment {
 
     }
 
+
+    public  void setErrorViewVisibility(boolean isVisible) {
+
+        if(isVisible){
+            this.currentView.findViewById(R.id.refresh_error).setVisibility(View.VISIBLE);
+        }else{
+
+            this.currentView.findViewById(R.id.refresh_error).setVisibility(View.GONE);
+        }
+
+    }
 
     //点击
     public abstract void itemClick(View view, int position);

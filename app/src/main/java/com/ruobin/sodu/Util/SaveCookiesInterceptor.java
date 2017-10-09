@@ -39,7 +39,9 @@ public class SaveCookiesInterceptor implements Interceptor {
                 if(!str.contains("sodu_user")) continue;
                 String cookieStr = str.replaceAll("20\\d\\d","2030");
                 Cookie cookie = Cookie.parse(request.url(), cookieStr);
-                saveCookie(cookie.name(),cookieStr);
+                if(cookie.name().equals("sodu_user")) {
+                    saveCookie(cookie.name(),cookieStr);
+                }
             }
 
         }

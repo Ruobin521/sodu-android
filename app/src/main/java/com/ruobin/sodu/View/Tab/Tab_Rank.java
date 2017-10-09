@@ -51,7 +51,7 @@ public class Tab_Rank extends BaseTabFragment {
 
     private void loadDataByIndex(int index) {
 
-        this.getView().findViewById(R.id.refresh_error).setVisibility(View.GONE);
+        this.currentView.findViewById(R.id.refresh_error).setVisibility(View.GONE);
 
         String url = "";
         if (index == 1) {
