@@ -20,14 +20,15 @@
         </activity>
         <activity android:name=".UpdateCatalogActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".View.setting.LoginActivity" />
 
         <receiver android:name=".Receiver.LogonReceiver">
-            <intent-filter android:priority="1000" >
+            <intent-filter android:priority="1000">
                 <action android:name="com.ruobin.login" />
             </intent-filter>
         </receiver>
 
+        <activity android:name=".View.setting.PersonCenterActivity"></activity>
     </application>
 
 </manifest>

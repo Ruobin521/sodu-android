@@ -1,4 +1,4 @@
-package com.ruobin.sodu;
+package com.ruobin.sodu.View.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.ruobin.sodu.Constants.SoDuUrl;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
+import com.ruobin.sodu.R;
 import com.ruobin.sodu.Util.HttpHelper;
 
 import java.util.HashMap;
@@ -52,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 onLogin();
             }
         });
@@ -104,7 +104,6 @@ public class LoginActivity extends AppCompatActivity {
         if (isSuccess) {
 
             onBackPressed();
-
             Intent intent = new Intent();
             intent.setAction("com.ruobin.login");
             intent.putExtra("data", "login");

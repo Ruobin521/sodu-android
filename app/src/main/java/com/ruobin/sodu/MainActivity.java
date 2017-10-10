@@ -19,6 +19,7 @@ import com.ruobin.sodu.View.Tab.Tab_LocalShelf;
 import com.ruobin.sodu.View.Tab.Tab_OnlineShelf;
 import com.ruobin.sodu.View.Tab.Tab_Rank;
 import com.ruobin.sodu.View.Tab.Tab_Setting;
+import com.ruobin.sodu.View.setting.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -194,7 +195,7 @@ public class MainActivity extends FragmentActivity {
                 );
                 findViewById(R.id.id_tab_bottom_onlineShelf).setVisibility(View.VISIBLE);
             }else{
-
+                LogonService.removeCookie();
                 mFragments.remove(0);
                 tabs.remove(0);
                 findViewById(R.id.id_tab_bottom_onlineShelf).setVisibility(View.GONE);
