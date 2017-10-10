@@ -15,7 +15,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/nav_bar_height"
             android:background="@color/tabTextHighLight">
 
             <LinearLayout
@@ -49,7 +49,7 @@
                 android:gravity="center_vertical"
                 android:text="登录"
                 android:textColor="#fff"
-                android:textSize="@dimen/title_text_size" />
+                android:textSize="@dimen/nav_bar_text_size" />
         </FrameLayout>
 
         <ImageView
@@ -57,7 +57,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:src="@drawable/head" />
 
         <LinearLayout
@@ -166,7 +166,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="65dp"
             android:background="@color/transparent"
             android:gravity="center_horizontal|center_vertical"
             android:text="还没有账号？点击注册"
@@ -175,26 +175,11 @@
     </LinearLayout>
 
 
-    <FrameLayout
-        android:id="@+id/loading"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+    <include layout="@layout/item_loading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginTop="6dp"
-        android:visibility="gone"
-        android:background="@drawable/loading_back"
-        android:layout_marginBottom="50dp">
-
-        <com.wang.avi.AVLoadingIndicatorView
-            android:id="@+id/avi"
-            style="@style/AVLoadingIndicatorView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            app:indicatorColor="@color/white"
-            app:indicatorName="BallSpinFadeLoaderIndicator"
-            />
-    </FrameLayout>
+        android:layout_marginBottom="60dp"/>
 
 
 </FrameLayout>

@@ -7,7 +7,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/nav_bar_height"
         android:background="@color/tabTextHighLight">
 
         <TextView
@@ -18,7 +18,7 @@
             android:gravity="center_vertical"
             android:text="@string/tab_title_rank"
             android:textColor="#fff"
-            android:textSize="@dimen/title_text_size" />
+            android:textSize="@dimen/nav_bar_text_size" />
     </FrameLayout>
 
     <include layout="@layout/refresh_recycler_view"/>

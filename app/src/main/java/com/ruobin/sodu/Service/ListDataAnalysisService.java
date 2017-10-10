@@ -47,7 +47,6 @@ public class ListDataAnalysisService {
         return list;
     }
 
-
     public static List<Book> AnalysisRankDatas(String html) {
 
         List<Book> list = new ArrayList<Book>();
@@ -196,5 +195,40 @@ public class ListDataAnalysisService {
 
 
         return  count;
+    }
+
+    public static List<Book> AnalysisSearchDatas(String html) {
+
+        List<Book> list = new ArrayList<Book>();
+
+        if (html == null || html.equals("")) {
+            return null;
+        }
+        html = html.replaceAll("\r", "").replaceAll("\t", "").replaceAll("\n", "");
+        Pattern p = Pattern.compile("<div class=\"main-html\".*?<div style=\"width:88px;float:left;\">.*?</div>");
+
+        Matcher matcher = p.matcher(html);
+
+        while (matcher.find()) {
+            try {
+                String temp = matcher.group();
+                Book book = new Book();
+
+                Matcher nameMather = Pattern.compile("<a href=\"(.*?)\".*?>(.*?)<\\/a>.*?<a href=\\\".*?\\\".*?>(.*?)<\\/a>.*?;\\\">(.*?)<\\/div>.*?id=(.*?)\\\"").matcher(temp);
+                if (nameMather.find()) {
+
+                    book.BookName = nameMather.group(2);
+                    book.BookId = nameMather.group(5);
+                    book.NewestCatalogName = nameMather.group(3);
+                    book.UpdateTime = nameMather.group(4);
+                    book.SoDuUpdateCatalogUrl = nameMather.group(1);
+                    list.add(book);
+                }
+            } catch (Exception ex) {
+
+                continue;
+            }
+        }
+        return list;
     }
 }

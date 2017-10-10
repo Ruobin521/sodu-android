@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    FrameLayout loading;
+    LinearLayout loading;
     FrameLayout loginMain;
 
 
@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initView() {
 
-        loading = (FrameLayout)findViewById(R.id.loading);
+        loading = (LinearLayout)findViewById(R.id.loading);
         loginMain = (FrameLayout)findViewById(R.id.login_main);
 
         LinearLayout backBtn = (LinearLayout) findViewById(R.id.navigation_bar_back);

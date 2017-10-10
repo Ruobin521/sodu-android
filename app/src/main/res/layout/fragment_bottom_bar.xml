@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="60dp"
     android:layout_alignParentBottom="true"
-    android:background="#FCFCFC" >
+    android:background="#fdfdfd" >
 
     <LinearLayout
         android:layout_width="fill_parent"

@@ -1,7 +1,13 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_bar_height">46dp</dimen>
+    <dimen name="nav_bar_text_size">20sp</dimen>
+
+
+
+
     <dimen name="tabbar_text_size">13sp</dimen>
-    <dimen name="title_text_size">20sp</dimen>
+
 
     <dimen name="list_item_book_name_size">18sp</dimen>
     <dimen name="list_item_sbu_title_size">15sp</dimen>
@@ -9,4 +15,19 @@
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="setting_item_margin_bottom">0dp</dimen>
+    <dimen name="setting_item_height">52dp</dimen>
+    <dimen name="setting_icon_height">20dp</dimen>
+    <dimen name="setting_icon_width">20dp</dimen>
+    <dimen name="setting_icon_margin_left">20dp</dimen>
+
+    <dimen name="setting_text_size">17dp</dimen>
+    <dimen name="setting_text_margin_left">60dp</dimen>
+
+    <dimen name="setting_arrow_height">28dp</dimen>
+    <dimen name="setting_arrow_width">28dp</dimen>
+
+
 </resources>

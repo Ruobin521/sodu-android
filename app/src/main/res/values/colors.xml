@@ -2,8 +2,15 @@
 <resources>
     <color name="white">#fff</color>
     <color name="black">#000</color>
-    <color name="main_back_color">#FFEFEFF4</color>
+    <color name="main_back_color">#ebebeb</color>
     <color name="light_blue">#007aff</color>
+
+    <color name="edit_text_hint_color">#919193</color>
+
+
+    <color name="light_dark">#2b2b2b</color>
+
+
 
     <color name="dark_gray">#FFEFEFF4</color>
     <color name="light_gray">#D3D3D3</color>
@@ -16,9 +23,9 @@
 
 
 
-    <color name="item_rank_book_name">#444</color>
-    <color name="item_rank_txt_other">#aaa</color>
-    <color name="item_pressed_color">#eee</color>
+    <color name="item_rank_book_name">#333</color>
+    <color name="item_rank_txt_other">#909090</color>
+    <color name="item_pressed_color">#d9d9d9</color>
 
 
 

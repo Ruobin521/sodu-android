@@ -7,20 +7,69 @@
     android:background="@color/main_back_color"
     android:orientation="vertical">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/tabTextHighLight">
+        android:background="@color/tabTextHighLight"
+        >
+        <LinearLayout
+            android:id="@+id/navigation_bar_back"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:clickable="false"
+                android:layout_height="wrap_content"
+                android:src="@drawable/navigationbar_back_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="返回"
+                android:clickable="false"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+        </LinearLayout>
 
         <TextView
+            android:layout_toEndOf="@+id/navigation_bar_back"
+            android:layout_toStartOf="@+id/navigation_bar_back2"
             android:id="@+id/header_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|center_horizontal"
             android:textColor="#fff"
-            android:textSize="@dimen/title_text_size" />
-    </FrameLayout>
+            android:text="小说名称"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:layout_marginLeft="-10dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
+            android:textSize="@dimen/nav_bar_text_size"
+            />
+
+        <LinearLayout
+            android:id="@+id/navigation_bar_back2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:focusable="false"
+            android:orientation="horizontal"
+            >
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
 
     <include layout="@layout/refresh_recycler_view" />
 </LinearLayout>

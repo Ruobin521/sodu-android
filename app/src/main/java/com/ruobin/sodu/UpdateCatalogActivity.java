@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,9 +53,21 @@ public class UpdateCatalogActivity extends Activity {
 
         initRefreshView();
         initRecylerView();
+        initView();
 
         refreshLayout.autoRefresh();
 
+    }
+
+    private  void initView() {
+
+        LinearLayout backBtn = (LinearLayout) findViewById(R.id.navigation_bar_back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     protected void initRefreshView() {
@@ -203,19 +216,19 @@ public class UpdateCatalogActivity extends Activity {
     }
 
     public void itemClick(View view, int position) {
-        // Toast.makeText(getActivity(), "click " + position + " item", Toast.LENGTH_SHORT).show();
-        Book book = books.get(position);
-
-        Intent intent = new Intent();
-        //设置Intent的class属性，跳转到SecondActivity
-        intent.setClass(this, UpdateCatalogActivity.class);
-        //为intent添加额外的信息
-        intent.putExtra("book", book);
-        //启动Activity
-        // startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this.getActivity()).toBundle());
-        startActivity(intent);
-        // ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(this.getActivity(), R.anim.slide_in_right, R.anim.animo_no);
-        // ActivityCompat.startActivity(this.getActivity(),intent, compat.toBundle());
+//        // Toast.makeText(getActivity(), "click " + position + " item", Toast.LENGTH_SHORT).show();
+//        Book book = books.get(position);
+//
+//        Intent intent = new Intent();
+//        //设置Intent的class属性，跳转到SecondActivity
+//        intent.setClass(this, UpdateCatalogActivity.class);
+//        //为intent添加额外的信息
+//        intent.putExtra("book", book);
+//        //启动Activity
+//        // startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this.getActivity()).toBundle());
+//        startActivity(intent);
+//        // ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(this.getActivity(), R.anim.slide_in_right, R.anim.animo_no);
+//        // ActivityCompat.startActivity(this.getActivity(),intent, compat.toBundle());
 
     }
 

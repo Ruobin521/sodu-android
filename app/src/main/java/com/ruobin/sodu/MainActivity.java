@@ -200,6 +200,8 @@ public class MainActivity extends FragmentActivity {
                 findViewById(R.id.id_tab_bottom_onlineShelf).setVisibility(View.GONE);
             }
             initViewPager();
+            resetTabBtn();
+            tabs.get(0).setTabBtnHighlight();
 
         }catch (Exception ex){
             Log.d("error:",ex.getMessage().toString());

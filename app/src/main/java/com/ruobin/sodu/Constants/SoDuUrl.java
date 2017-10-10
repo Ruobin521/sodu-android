@@ -22,4 +22,8 @@ public class SoDuUrl {
     //个人书架
     public static String bookShelfPage = "http://www.sodu.cc/home.html";
 
+    //搜索
+    public static String bookSearchPage = "http://www.sodu.cc/result.html?searchstr=";
+
+
 }
