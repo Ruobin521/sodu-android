@@ -75,6 +75,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/setting_downliad_center"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/setting_item_height"
                 android:background="@drawable/touch_bg"
@@ -115,6 +116,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/setting_history"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/setting_item_height"
                 android:background="@drawable/touch_bg"

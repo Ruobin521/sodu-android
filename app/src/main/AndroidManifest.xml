@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ruobin.sodu"
-    >
+    package="com.ruobin.sodu">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -29,7 +28,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".View.setting.PersonCenterActivity"></activity>
+        <activity android:name=".View.setting.PersonCenterActivity" />
+        <activity android:name=".View.setting.HistoryActivity" />
+        <activity android:name=".BaseListViewActivity" />
+        <activity android:name=".View.setting.DownloadCenterActivity"></activity>
     </application>
 
 </manifest>

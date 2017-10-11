@@ -5,7 +5,7 @@ android {
         debug {
             keyAlias 'sodu_debug'
             keyPassword '918201'
-            storeFile file('/Volumes/files/sodu_debug.jks')
+            storeFile file('sodu_debug.jks')
             storePassword '918201'
         }
     }
@@ -20,6 +20,7 @@ android {
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -39,6 +40,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.wang.avi:library:2.1.3'
     compile 'com.github.zcweng:switch-button:0.0.3@aar'
-    compile 'com.android.support.constraint:constraint-layout:+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
     testCompile 'junit:junit:4.12'
 }

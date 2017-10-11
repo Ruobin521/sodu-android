@@ -45,7 +45,6 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Instance = this;
         initView();
         initViewPager();
@@ -160,7 +159,7 @@ public class MainActivity extends FragmentActivity {
 
                 tab.setTabBtnHighlight();
 
-                if(position == tabs.size() -1 && !LogonService.isLogon()) {
+                if (position == tabs.size() - 1 && !LogonService.isLogon()) {
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.Instance, LoginActivity.class);
                     startActivity(intent);
@@ -184,9 +183,9 @@ public class MainActivity extends FragmentActivity {
 
     public void setLogon(boolean isLogon) {
 
-        try{
+        try {
             if (isLogon) {
-                mFragments.add(0,new Tab_OnlineShelf());
+                mFragments.add(0, new Tab_OnlineShelf());
                 tabs.add(0, new TabEntity(
                         R.id.id_tab_bottom_onlineShelf,
                         R.id.btn_tab_bottom_onlineshelf,
@@ -195,7 +194,7 @@ public class MainActivity extends FragmentActivity {
                         R.drawable.tabbar_online_shelf_selected)
                 );
                 findViewById(R.id.id_tab_bottom_onlineShelf).setVisibility(View.VISIBLE);
-            }else{
+            } else {
 
                 LogonService.removeCookie();
                 SettingService.removeValue(this, SettingService.SettingOption.UserName.toString());
@@ -207,8 +206,8 @@ public class MainActivity extends FragmentActivity {
             resetTabBtn();
             tabs.get(0).setTabBtnHighlight();
 
-        }catch (Exception ex){
-            Log.d("error:",ex.getMessage().toString());
+        } catch (Exception ex) {
+            Log.d("error:", ex.getMessage().toString());
         }
     }
 

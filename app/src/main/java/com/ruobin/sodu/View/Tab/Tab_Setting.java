@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.ruobin.sodu.R;
 import com.ruobin.sodu.Service.LogonService;
 import com.ruobin.sodu.Service.SettingService;
+import com.ruobin.sodu.View.setting.DownloadCenterActivity;
+import com.ruobin.sodu.View.setting.HistoryActivity;
 import com.ruobin.sodu.View.setting.LoginActivity;
 import com.ruobin.sodu.View.setting.PersonCenterActivity;
 import com.suke.widget.SwitchButton;
@@ -36,7 +38,6 @@ public class Tab_Setting extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         currentView = inflater.inflate(R.layout.fragment_tab_setting, container, false);
         initView();
         initSwitchSetting();
@@ -72,6 +73,26 @@ public class Tab_Setting extends Fragment {
                 }
             }
         });
+
+        //初始化下载中心
+        RelativeLayout download = (RelativeLayout) currentView.findViewById(R.id.setting_downliad_center);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateTo(DownloadCenterActivity.class);
+            }
+        });
+
+
+        //初始化历史纪录
+        RelativeLayout history = (RelativeLayout) currentView.findViewById(R.id.setting_history);
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    navigateTo(HistoryActivity.class);
+            }
+        });
+
 
         //初始化IsAutoAddToOnlineShelf
         SwitchButton btn = (SwitchButton) currentView.findViewById(R.id.switch_auto_add_online_shelf);

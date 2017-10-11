@@ -2,10 +2,6 @@ package com.ruobin.sodu;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,39 +17,24 @@ import com.ruobin.sodu.Constants.SoDuUrl;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.Service.ListDataAnalysisService;
-import com.ruobin.sodu.Util.CustomRecyclerAdapter;
-import com.ruobin.sodu.Util.DividerItemDecoration;
 import com.ruobin.sodu.Util.HttpHelper;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
-
-    public List<Book> books = new ArrayList<Book>();
-
-    private RecyclerView mRecyclerView;
-
-    public RefreshLayout refreshLayout;
-
-    private CustomRecyclerAdapter<Book> mAdapter;
+public class SearchActivity extends BaseListViewActivity {
 
     LinearLayout loading;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+    public SearchActivity() {
+        layoutId = R.layout.activity_search;
+        itemLayoutId = R.layout.item_rank;
 
-        initRefreshView();
-        initRecylerView();
-        initView();
     }
 
 
-    private void initView() {
+    public void initView() {
 
         loading = (LinearLayout) findViewById(R.id.loading);
 
@@ -70,7 +51,7 @@ public class SearchActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSearch();
+                loadData();
             }
         });
 
@@ -81,7 +62,7 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    onSearch();
+                    loadData();
                 }
                 return false;
             }
@@ -89,40 +70,9 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    protected void initRefreshView() {
-        refreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
-        refreshLayout.setEnableLoadmore(false);
-        refreshLayout.setEnableRefresh(false);
-    }
 
-    protected void initRecylerView() {
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.list_recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mAdapter = new CustomRecyclerAdapter(books, R.layout.item_rank));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL_LIST));
-
-        mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.ItemActionListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                itemClick(view, position);
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position) {
-                itemLongClick(view, position);
-            }
-
-            @Override
-            public void onItemInitData(View view, Object item) {
-                itemInitData(view, item);
-            }
-        });
-    }
-
-
-    public void onSearch() {
+    @Override
+    public void loadData() {
         try {
             EditText text = (EditText) findViewById(R.id.txt_search);
 
@@ -155,7 +105,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void success(String html) {
                 loading.setVisibility(View.GONE);
-                setData(html);
+                updateData(html);
             }
 
             @Override
@@ -167,7 +117,8 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    public void setData(String html) {
+    @Override
+    public void updateData(String html) {
 
         books.clear();
 
@@ -182,17 +133,7 @@ public class SearchActivity extends AppCompatActivity {
             books = new ArrayList<Book>();
         }
         books.addAll(list);
-        this.updateData();
-    }
-
-
-    public void updateData() {
-        mAdapter.updateData(books);
-    }
-
-    public void onRequestFailure() {
-
-
+        super.updateData(html);
     }
 
 
@@ -225,4 +166,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onRequestFailure() {
+
+        Toast.makeText(this, "搜索失败", Toast.LENGTH_SHORT).show();
+
+    }
 }
