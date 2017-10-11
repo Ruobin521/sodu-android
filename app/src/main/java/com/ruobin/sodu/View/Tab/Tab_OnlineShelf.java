@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ruobin.sodu.Constants.SoDuUrl;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.R;
-import com.ruobin.sodu.SearchActivity;
 import com.ruobin.sodu.Service.ListDataAnalysisService;
 import com.ruobin.sodu.UpdateCatalogActivity;
 import com.ruobin.sodu.Util.HttpHelper;
@@ -29,21 +27,7 @@ public class Tab_OnlineShelf extends BaseTabFragment {
     }
 
 
-    @Override
-    public void initUI() {
-        ImageButton btnSearch = (ImageButton)currentView.findViewById(R.id.btn_search);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent = new Intent();
-                //设置Intent的class属性，跳转到SecondActivity
-                intent.setClass(getActityty(), SearchActivity.class);
-                //启动Activity
-                startActivity(intent);
-            }
-        });
-    }
 
     private Activity getActityty(){
 

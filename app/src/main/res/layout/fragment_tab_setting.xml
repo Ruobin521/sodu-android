@@ -201,46 +201,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/setting_icon_margin_left"
                     android:focusable="false"
-                    android:src="@drawable/setting_addbook" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/setting_text_margin_left"
-                    android:focusable="false"
-                    android:text="自动更新本地收藏"
-                    android:textColor="@color/light_dark"
-                    android:textSize="@dimen/setting_text_size" />
-
-                <com.suke.widget.SwitchButton
-                    android:id="@+id/switch_auto_update_local"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/setting_icon_margin_left"
-                    android:background="#d9d9d9"></View>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/setting_item_height"
-                android:background="@drawable/touch_bg"
-                android:clickable="true">
-
-                <ImageView
-                    android:layout_width="@dimen/setting_icon_width"
-                    android:layout_height="@dimen/setting_icon_height"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/setting_icon_margin_left"
-                    android:focusable="false"
                     android:src="@drawable/setting_wwan" />
 
                 <TextView
@@ -264,6 +224,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/setting_rjsm"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/setting_item_height"
                 android:background="@drawable/touch_bg"
@@ -326,7 +287,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="10dp">
                 <ImageView
                     android:layout_marginRight="30dp"
                     android:layout_width="100dp"
@@ -343,9 +304,10 @@
 
 
             <TextView
+                android:id="@+id/txt_version_name"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="当前版本:1.0 Bata"
+                android:text=""
                 android:textSize="14sp"
                 android:layout_marginTop="25dp"
                 android:textColor="@color/item_rank_txt_other"

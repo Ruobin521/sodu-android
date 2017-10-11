@@ -2,13 +2,14 @@ package com.ruobin.sodu.View.setting;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ruobin.sodu.R;
+import com.ruobin.sodu.Service.SettingService;
 
 public class PersonCenterActivity extends Activity {
 
@@ -20,6 +21,10 @@ public class PersonCenterActivity extends Activity {
     }
 
     private void initView() {
+        String userName = SettingService.getValue(this, SettingService.SettingOption.UserName.name(), "");
+        TextView textView = (TextView)findViewById(R.id.txt_login_user);
+        textView.setText(userName);
+
         LinearLayout backBtn = (LinearLayout) findViewById(R.id.navigation_bar_back);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +48,5 @@ public class PersonCenterActivity extends Activity {
         intent.setAction("com.ruobin.login");
         intent.putExtra("data", "logout");
         this.sendOrderedBroadcast(intent, null);
-
     }
 }

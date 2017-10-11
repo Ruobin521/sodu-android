@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.ruobin.sodu.Constants.SoDuUrl;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.R;
+import com.ruobin.sodu.Service.SettingService;
 import com.ruobin.sodu.Util.HttpHelper;
 
 import java.util.HashMap;
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         loginMain.setEnabled(false);
 
         String url = SoDuUrl.loginPostPage;
-        Map<String, String> postData = new HashMap<>();
+        final Map<String, String> postData = new HashMap<>();
         postData.put("username", txtName.getText().toString());
         postData.put("userpass", txtPassWd.getText().toString());
 
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             public void success(String html) {
 
                 if (html != null && html.contains("{\"success\":true}")) {
-                    onLoginResult(true,"");
+                    onLoginResult(true,postData.get("username"));
                 } else {
                     onLoginResult(false,"登录失败,请检测用户名密码是否正确");
                 }
@@ -104,6 +105,8 @@ public class LoginActivity extends AppCompatActivity {
         if (isSuccess) {
 
             onBackPressed();
+
+            SettingService.putValue(this, SettingService.SettingOption.UserName.name(),info);
             Intent intent = new Intent();
             intent.setAction("com.ruobin.login");
             intent.putExtra("data", "login");

@@ -25,6 +25,7 @@ public class Tab_Hot extends BaseTabFragment {
         super.setId(R.layout.fragment_tab_hot,R.layout.item_rank,false);
     }
 
+
     public void loadData() {
         super.loadData();
         String url = SoDuUrl.home;

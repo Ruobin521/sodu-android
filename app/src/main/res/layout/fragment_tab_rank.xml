@@ -19,6 +19,15 @@
             android:text="@string/tab_title_rank"
             android:textColor="#fff"
             android:textSize="@dimen/nav_bar_text_size" />
+
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/search"
+            />
     </FrameLayout>
 
     <include layout="@layout/refresh_recycler_view"/>

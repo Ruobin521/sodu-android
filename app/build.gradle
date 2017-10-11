@@ -5,7 +5,7 @@ android {
         debug {
             keyAlias 'sodu_debug'
             keyPassword '918201'
-            storeFile file('C:/Users/Ruobin/Desktop/sodu_debug.jks')
+            storeFile file('/Volumes/files/sodu_debug.jks')
             storePassword '918201'
         }
     }
@@ -16,7 +16,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0 开发中"
     }
     buildTypes {
         release {

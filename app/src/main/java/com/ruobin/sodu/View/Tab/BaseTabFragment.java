@@ -1,5 +1,6 @@
 package com.ruobin.sodu.View.Tab;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.R;
+import com.ruobin.sodu.SearchActivity;
 import com.ruobin.sodu.Util.CustomRecyclerAdapter;
 import com.ruobin.sodu.Util.DividerItemDecoration;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -82,6 +85,22 @@ public abstract class BaseTabFragment extends Fragment {
 
     public  void initUI() {
 
+        ImageButton btnSearch = (ImageButton)currentView.findViewById(R.id.btn_search);
+        if(btnSearch == null) {
+            return;
+        }
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent();
+                //设置Intent的class属性，跳转到SecondActivity
+                intent.setClass(currentView.getContext(), SearchActivity.class);
+                //启动Activity
+                startActivity(intent);
+            }
+        });
 
     }
 

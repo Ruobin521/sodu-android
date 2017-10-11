@@ -1,5 +1,6 @@
 package com.ruobin.sodu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -53,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void initView() {
 
-        loading = (LinearLayout)findViewById(R.id.loading);
+        loading = (LinearLayout) findViewById(R.id.loading);
 
         LinearLayout backBtn = (LinearLayout) findViewById(R.id.navigation_bar_back);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,13 +75,12 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
-        EditText text = (EditText)findViewById(R.id.txt_search);
+        EditText text = (EditText) findViewById(R.id.txt_search);
         text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
-                if(i == EditorInfo.IME_ACTION_SEARCH)
-                {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
                     onSearch();
                 }
                 return false;
@@ -123,23 +124,28 @@ public class SearchActivity extends AppCompatActivity {
 
     public void onSearch() {
         try {
-            EditText text = (EditText)findViewById(R.id.txt_search);
+            EditText text = (EditText) findViewById(R.id.txt_search);
 
-            if(TextUtils.isEmpty(text.getText().toString())) {
-                Toast.makeText(this,"请输入搜索关键字",Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(text.getText().toString())) {
+                Toast.makeText(this, "请输入搜索关键字", Toast.LENGTH_SHORT).show();
                 return;
             }
             String searchPara = text.getText().toString();
-            searchPara=  URLEncoder.encode(searchPara,"UTF-8");
+            searchPara = URLEncoder.encode(searchPara, "UTF-8");
             //Toast.makeText(this,searchPara,Toast.LENGTH_SHORT).show();
             search(searchPara);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
         }
     }
 
 
     private void search(String para) {
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        }
 
         loading.setVisibility(View.VISIBLE);
 
@@ -184,7 +190,7 @@ public class SearchActivity extends AppCompatActivity {
         mAdapter.updateData(books);
     }
 
-    public void  onRequestFailure(){
+    public void onRequestFailure() {
 
 
     }

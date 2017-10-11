@@ -33,6 +33,7 @@ public class Tab_Rank extends BaseTabFragment {
     }
 
 
+
     @Override
     public void loadData() {
         super.loadData();

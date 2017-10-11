@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ruobin.sodu.Service.LogonService;
+import com.ruobin.sodu.Service.SettingService;
 import com.ruobin.sodu.View.Tab.Tab_Hot;
 import com.ruobin.sodu.View.Tab.Tab_LocalShelf;
 import com.ruobin.sodu.View.Tab.Tab_OnlineShelf;
@@ -195,7 +196,9 @@ public class MainActivity extends FragmentActivity {
                 );
                 findViewById(R.id.id_tab_bottom_onlineShelf).setVisibility(View.VISIBLE);
             }else{
+
                 LogonService.removeCookie();
+                SettingService.removeValue(this, SettingService.SettingOption.UserName.toString());
                 mFragments.remove(0);
                 tabs.remove(0);
                 findViewById(R.id.id_tab_bottom_onlineShelf).setVisibility(View.GONE);
