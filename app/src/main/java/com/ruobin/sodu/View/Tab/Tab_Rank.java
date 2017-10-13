@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ruobin.sodu.Constants.SoDuUrl;
+import com.ruobin.sodu.DBHelper.BookCacheDao;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.R;
@@ -29,7 +30,7 @@ public class Tab_Rank extends BaseTabFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setId(R.layout.fragment_tab_rank, R.layout.item_rank, true);
+        super.setId(R.layout.fragment_tab_rank, R.layout.item_rank, true, BookCacheDao.BookCacheType.Rank);
     }
 
 
@@ -109,24 +110,18 @@ public class Tab_Rank extends BaseTabFragment {
 
         tx.setText(stringBuilder.toString());
         super.updateUI();
+        super.endLoad();
     }
 
     @Override
     public void itemClick(View view, int position) {
-        // Toast.makeText(getActivity(), "click " + position + " item", Toast.LENGTH_SHORT).show();
         Book book = books.get(position);
 
-        Intent intent = new Intent();
-        //设置Intent的class属性，跳转到SecondActivity
-        intent.setClass(this.getActivity(), UpdateCatalogActivity.class);
-        //为intent添加额外的信息
-        intent.putExtra("book", book);
-        //启动Activity
-        // startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this.getActivity()).toBundle());
-        startActivity(intent);
-        // ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(this.getActivity(), R.anim.slide_in_right, R.anim.animo_no);
-        // ActivityCompat.startActivity(this.getActivity(),intent, compat.toBundle());
 
+        Intent intent = new Intent();
+        intent.setClass(this.getActivity(), UpdateCatalogActivity.class);
+        intent.putExtra("book", book);
+        startActivity(intent);
     }
 
     @Override

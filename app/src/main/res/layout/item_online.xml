@@ -17,29 +17,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="小说名称"
             android:textColor="@color/item_rank_book_name"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textSize="@dimen/list_item_book_name_size"
-            />
+            android:textSize="@dimen/list_item_book_name_size" />
+
+        <ImageView
+            android:id="@+id/item_online_img_new"
+            android:layout_width="35dp"
+            android:layout_height="25dp"
+            android:src="@drawable/new_blue"
+            android:scaleType="fitCenter"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/item_online_book_name"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/item_online_update_time"
             android:layout_width="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="left"
-            android:text="2017/10/5 11:52:00"
-            android:textColor="@color/item_rank_txt_other"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_gravity="left"
             android:layout_marginRight="10dp"
             android:layout_marginTop="1dp"
-            android:maxLines="1"
             android:ellipsize="end"
-            android:textSize="14dp"
-            />
+            android:gravity="left"
+            android:maxLines="1"
+            android:text="2017/10/5 11:52:00"
+            android:textColor="@color/item_rank_txt_other"
+            android:textSize="14dp" />
     </RelativeLayout>
 
 
@@ -90,8 +98,7 @@
             android:gravity="center"
             android:text="读至:"
             android:textColor="@color/item_rank_txt_other"
-            android:textSize="@dimen/list_item_sbu_title_size"
-            />
+            android:textSize="@dimen/list_item_sbu_title_size" />
 
         <TextView
             android:id="@+id/item_online_old_chapter_name"
@@ -101,8 +108,7 @@
             android:gravity="center"
             android:text="更新时间"
             android:textColor="@color/item_rank_txt_other"
-            android:textSize="@dimen/list_item_sbu_title_size"
-            />
+            android:textSize="@dimen/list_item_sbu_title_size" />
 
     </LinearLayout>
 

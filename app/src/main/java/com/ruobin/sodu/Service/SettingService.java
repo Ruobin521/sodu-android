@@ -10,7 +10,7 @@ public class SettingService {
 
     public final static String SETTING = "Setting";
 
-    public static enum SettingOption {
+    public  enum SettingOption {
 
         //用户名
         UserName,

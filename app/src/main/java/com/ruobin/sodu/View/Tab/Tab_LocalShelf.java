@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ruobin.sodu.Constants.SoDuUrl;
+import com.ruobin.sodu.DBHelper.BookCacheDao;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.R;
@@ -22,7 +23,7 @@ public class Tab_LocalShelf extends BaseTabFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setId(R.layout.fragment_tab_local_shelf,R.layout.item_local,false);
+        super.setId(R.layout.fragment_tab_local_shelf,R.layout.item_local,false, BookCacheDao.BookCacheType.LocalShelf);
     }
 
 
@@ -54,6 +55,7 @@ public class Tab_LocalShelf extends BaseTabFragment {
         List<Book> list  = ListDataAnalysisService.AnalysisHotRecommendDatas(html);
         books = list;
         super.updateUI();
+        super.endLoad();
     }
 
 

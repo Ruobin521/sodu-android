@@ -35,6 +35,7 @@ public class ListDataAnalysisService {
                     book.BookName = nameMather.group(2);
                     book.BookId = nameMather.group(5);
                     book.NewestCatalogName = nameMather.group(3);
+                    book.LastReadCatalogName = nameMather.group(3);
                     book.UpdateTime = nameMather.group(4);
                     book.SoDuUpdateCatalogUrl = nameMather.group(1);
                     list.add(book);

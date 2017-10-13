@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ruobin.sodu.Constants.SoDuUrl;
+import com.ruobin.sodu.DBHelper.BookCacheDao;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.R;
@@ -22,7 +23,7 @@ public class Tab_Hot extends BaseTabFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setId(R.layout.fragment_tab_hot,R.layout.item_rank,false);
+        super.setId(R.layout.fragment_tab_hot,R.layout.item_rank,false, BookCacheDao.BookCacheType.Hot);
     }
 
 
@@ -54,6 +55,7 @@ public class Tab_Hot extends BaseTabFragment {
         List<Book> list  = ListDataAnalysisService.AnalysisHotRecommendDatas(html);
         books = list;
         super.updateUI();
+        super.endLoad();
     }
 
 

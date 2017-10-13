@@ -2,6 +2,8 @@ package com.ruobin.sodu.View.Tab;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.ruobin.sodu.DBHelper.BookCacheDao;
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.R;
 import com.ruobin.sodu.SearchActivity;
@@ -31,7 +34,7 @@ public abstract class BaseTabFragment extends Fragment {
 
     public boolean isLoading;
 
-    public List<Book> books = new ArrayList<Book>();
+    public List<Book> books;
 
     protected View currentView;
 
@@ -47,10 +50,31 @@ public abstract class BaseTabFragment extends Fragment {
 
     private boolean isNeeLoadMore;
 
-    public void setId(int tab, int listItem, Boolean loadMore) {
+    BookCacheDao.BookCacheType cacheType = BookCacheDao.BookCacheType.None;
+
+    BookCacheDao dao;
+
+    private Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    updateUI();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    };
+
+    public void setId(int tab, int listItem, Boolean loadMore, BookCacheDao.BookCacheType cache) {
         tabId = tab;
         listItemId = listItem;
         isNeeLoadMore = loadMore;
+        cacheType = cache;
     }
 
     @Override
@@ -79,14 +103,38 @@ public abstract class BaseTabFragment extends Fragment {
             }
         }
 
+        dao = new BookCacheDao(getContext());
+
         return currentView;
     }
 
+    public void loadCacheData() {
 
-    public  void initUI() {
+//        if(cacheType != BookCacheDao.BookCacheType.OnlineShelf){
+//            return;
+//        }
 
-        ImageButton btnSearch = (ImageButton)currentView.findViewById(R.id.btn_search);
-        if(btnSearch == null) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Book> caches = dao.getBooksByCacheType(cacheType);
+                    if(caches != null && caches.size() >0) {
+                        books = caches;
+                        mHandler.sendEmptyMessage(0);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    public void initUI() {
+
+        ImageButton btnSearch = (ImageButton) currentView.findViewById(R.id.btn_search);
+        if (btnSearch == null) {
             return;
         }
 
@@ -190,12 +238,11 @@ public abstract class BaseTabFragment extends Fragment {
     }
 
 
-    public  void updateUI(){
-
+    public void updateUI() {
         if (books != null && books.size() > 0) {
             mAdapter.updateData(books);
+            dao.addBooks(books, cacheType);
         }
-        endLoad();
     }
 
 
@@ -242,6 +289,9 @@ public abstract class BaseTabFragment extends Fragment {
     public void loadData() {
         isLoading = true;
         setErrorViewVisibility(false);
+        if(books==null || books.size() ==0) {
+            loadCacheData();
+        }
     }
 
     //获取数据
@@ -250,11 +300,11 @@ public abstract class BaseTabFragment extends Fragment {
     }
 
 
-    public  void setErrorViewVisibility(boolean isVisible) {
+    public void setErrorViewVisibility(boolean isVisible) {
 
-        if(isVisible){
+        if (isVisible) {
             this.currentView.findViewById(R.id.refresh_error).setVisibility(View.VISIBLE);
-        }else{
+        } else {
 
             this.currentView.findViewById(R.id.refresh_error).setVisibility(View.GONE);
         }
