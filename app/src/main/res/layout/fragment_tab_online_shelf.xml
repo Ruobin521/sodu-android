@@ -1,52 +1,78 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+  >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_bar_height"
         android:background="@color/tabTextHighLight">
 
-        <TextView
-            android:id="@+id/tab_online_title"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:text="@string/tab_title_online_shelf"
-            android:textColor="#fff"
-            android:textSize="@dimen/nav_bar_text_size" />
-        />
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:visibility="gone"
+                android:id="@+id/loading_indicator"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                app:indicatorColor="@color/white"
+                app:indicatorName="LineSpinFadeLoaderIndicator"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:id="@+id/tab_online_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:text="@string/tab_title_online_shelf"
+                android:textColor="#fff"
+                android:textSize="@dimen/nav_bar_text_size" />
+            />
+        </LinearLayout>
+
 
         <ImageButton
             android:id="@+id/btn_search"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/search"
+            android:background="@drawable/btn_trans_bg"
+            android:src="@drawable/search"
+            android:padding="9dp"
+            android:scaleType="fitXY"
             />
 
         <Button
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:id="@+id/btn_set_all_had_read"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/btn_trans_bg"
             android:gravity="center_vertical"
             android:text="全标已读"
             android:textColor="#fff"
-            android:textSize="17sp"
-            android:background="@color/transparent"/>
+            android:textSize="17sp" />
 
     </RelativeLayout>
 
     <include layout="@layout/refresh_recycler_view" />
-
 
 </LinearLayout>

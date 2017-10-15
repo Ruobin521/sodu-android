@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +27,7 @@ import java.util.List;
 public class UpdateCatalogActivity extends Activity {
 
     public List<Book> books = new ArrayList<Book>();
-
     Book currentBook;
-
     private int pageIndex = 0;
     private int pageCount = 0;
 
@@ -124,6 +123,7 @@ public class UpdateCatalogActivity extends Activity {
 
 
     public void loadData() {
+
         loadDataByIndex(1);
     }
 
@@ -138,7 +138,7 @@ public class UpdateCatalogActivity extends Activity {
     }
 
     private void loadDataByIndex(int index) {
-
+        setErrorViewVisibility(false);
         String url = "";
         if (index == 1) {
             url = currentBook.SoDuUpdateCatalogUrl;
@@ -203,10 +203,13 @@ public class UpdateCatalogActivity extends Activity {
     public void onRequestFailure() {
 
         if (books == null || books.size() == 0) {
-            this.findViewById(R.id.refresh_error).setVisibility(View.VISIBLE);
+            setErrorViewVisibility(true);
         }
-
         endLoad();
+    }
+
+    private  void setErrorViewVisibility(boolean isVisiable) {
+        this.findViewById(R.id.refresh_error).setVisibility(isVisiable? View.VISIBLE :View.GONE);
     }
 
     private void endLoad() {

@@ -54,7 +54,7 @@ public class BookCacheDao {
     }
 
 
-    public void insertOrUpdate(Book book, BookCacheType type) {
+    public void insertOrUpdate( BookCacheType type,Book book) {
         try {
             deleteBookByTypeAndId(type,book.BookId);
             BookCache cache = new BookCache(book, type.getValue());

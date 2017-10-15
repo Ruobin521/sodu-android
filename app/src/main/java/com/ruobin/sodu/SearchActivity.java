@@ -3,6 +3,7 @@ package com.ruobin.sodu;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -10,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.Service.ListDataAnalysisService;
 import com.ruobin.sodu.Util.HttpHelper;
+import com.ruobin.sodu.View.MenuPopupWindow;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -149,7 +152,9 @@ public class SearchActivity extends BaseListViewActivity {
 
 
     public void itemLongClick(View view, int position) {
-        Toast.makeText(this, "long click " + position + " item", Toast.LENGTH_SHORT).show();
+        Book book = books.get(position);
+        MenuPopupWindow popupView = new MenuPopupWindow(this,R.layout.popup_add_online,book);
+        popupView.showAtLocation(this.getCurrentFocus(), Gravity.CENTER, 0, 0);
     }
 
 

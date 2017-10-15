@@ -1,9 +1,15 @@
 package com.ruobin.sodu.Util;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
+
+import com.ruobin.sodu.R;
+import com.ruobin.sodu.View.MenuPopupWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +24,6 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
     private int itemViewId;
 
     private CustomRecyclerAdapter.ItemActionListener onItemActionListener;
-
 
     public CustomRecyclerAdapter(List<T> data,int id) {
 
@@ -49,15 +54,26 @@ public class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<CustomRecycle
         if (mData == null || mData.isEmpty()) {
             return;
         }
-
         int index = mData.indexOf(item);
         mData.remove(item);
         notifyItemRemoved(index);
+
+
+    }
+
+    /**
+     * 删除Item
+     */
+    public void upddateItem(T item) {
+        if (mData == null || mData.isEmpty()) {
+            return;
+        }
+        int index = mData.indexOf(item);
+        notifyItemChanged(index);
     }
 
     @Override
     public ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(itemViewId, parent, false);
         ListViewHolder holder = new ListViewHolder(view);
         return holder;

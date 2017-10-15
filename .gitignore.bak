@@ -49,5 +49,6 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+libs/
 src/main/java/com/ruobin/sodu/ListItem/
 src/main/java/com/ruobin/sodu/ViewModel/

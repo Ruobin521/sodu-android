@@ -7,12 +7,14 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ruobin.sodu.Model.MenuMessageEvent;
 import com.ruobin.sodu.Service.LogonService;
 import com.ruobin.sodu.Service.SettingService;
 import com.ruobin.sodu.View.Tab.Tab_Hot;
@@ -21,6 +23,10 @@ import com.ruobin.sodu.View.Tab.Tab_OnlineShelf;
 import com.ruobin.sodu.View.Tab.Tab_Rank;
 import com.ruobin.sodu.View.Tab.Tab_Setting;
 import com.ruobin.sodu.View.setting.LoginActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +54,14 @@ public class MainActivity extends FragmentActivity {
         Instance = this;
         initView();
         initViewPager();
+        EventBus.getDefault().register(this);
+    }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     protected void resetTabBtn() {
@@ -180,6 +193,15 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MenuMessageEvent event) {
+        if (event.eventType == MenuMessageEvent.EventType.Login) {
+            setLogon(true);
+        } else if (event.eventType == MenuMessageEvent.EventType.Logout) {
+            setLogon(false);
+        }
+    }
 
     public void setLogon(boolean isLogon) {
 

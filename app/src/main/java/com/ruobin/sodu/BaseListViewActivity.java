@@ -6,6 +6,7 @@ import android.support.annotation.CallSuper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.PopupWindow;
 
 import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.Util.CustomRecyclerAdapter;
@@ -86,7 +87,7 @@ public abstract class BaseListViewActivity extends Activity {
     public abstract void itemClick(View view, int position);
 
 
-    public abstract void itemLongClick(View view, int position);
+    public abstract void itemLongClick(View view, int position );
 
 
     public abstract void itemInitData(View view, Object item) ;

@@ -43,4 +43,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('src/main/libs/ormlite-android-5.0.jar')
     compile files('src/main/libs/ormlite-core-5.0.jar')
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

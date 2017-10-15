@@ -3,9 +3,11 @@ package com.ruobin.sodu.View.Tab;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.ruobin.sodu.R;
 import com.ruobin.sodu.Service.ListDataAnalysisService;
 import com.ruobin.sodu.UpdateCatalogActivity;
 import com.ruobin.sodu.Util.HttpHelper;
+import com.ruobin.sodu.View.MenuPopupWindow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,8 +119,6 @@ public class Tab_Rank extends BaseTabFragment {
     @Override
     public void itemClick(View view, int position) {
         Book book = books.get(position);
-
-
         Intent intent = new Intent();
         intent.setClass(this.getActivity(), UpdateCatalogActivity.class);
         intent.putExtra("book", book);
@@ -126,7 +127,9 @@ public class Tab_Rank extends BaseTabFragment {
 
     @Override
     public void itemLongClick(View view, int position) {
-        Toast.makeText(getActivity(), "long click " + position + " item", Toast.LENGTH_SHORT).show();
+        Book book = books.get(position);
+        MenuPopupWindow popupView = new MenuPopupWindow(this.getActivity(),R.layout.popup_add_online,book);
+        popupView.showAtLocation(this.getView(), Gravity.CENTER, 0, 0);
     }
 
     @Override

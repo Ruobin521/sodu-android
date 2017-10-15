@@ -3,7 +3,9 @@ package com.ruobin.sodu.View.Tab;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ruobin.sodu.Constants.SoDuUrl;
@@ -14,6 +16,7 @@ import com.ruobin.sodu.R;
 import com.ruobin.sodu.Service.ListDataAnalysisService;
 import com.ruobin.sodu.UpdateCatalogActivity;
 import com.ruobin.sodu.Util.HttpHelper;
+import com.ruobin.sodu.View.MenuPopupWindow;
 
 import java.util.List;
 
@@ -47,11 +50,9 @@ public class Tab_Hot extends BaseTabFragment {
 
     @Override
     public void setData(String html) {
-
         if(html == null || html == ""){
             return;
         }
-
         List<Book> list  = ListDataAnalysisService.AnalysisHotRecommendDatas(html);
         books = list;
         super.updateUI();
@@ -70,7 +71,9 @@ public class Tab_Hot extends BaseTabFragment {
 
     @Override
     public void itemLongClick(View view, int position) {
-
+        Book book = books.get(position);
+        MenuPopupWindow popupView = new MenuPopupWindow(this.getActivity(),R.layout.popup_add_online,book);
+        popupView.showAtLocation(this.getView(), Gravity.CENTER, 0, 0);
     }
 
     @Override

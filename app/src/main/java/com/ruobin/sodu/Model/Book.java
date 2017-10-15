@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by ruobin on 2017/9/26.
  */
-public class Book implements Serializable {
+public class Book implements Serializable  {
 
     public int Id;
 
@@ -41,4 +41,20 @@ public class Book implements Serializable {
     public List<BookCatalog> CatalogList ;
 
 
+    public Book clone(){
+       Book temp = new Book();
+        temp.BookId = this.BookId;
+        temp.BookName = this.BookName;
+        temp.NewestCatalogName = this.NewestCatalogName;
+        temp.NewestCatalogUrl = this.NewestCatalogUrl;
+        temp.LastReadCatalogName = this.LastReadCatalogName;
+        temp.LastReadCatalogUrl = this.LastReadCatalogUrl;
+        temp.UpdateTime = this.UpdateTime;
+        temp.Author = this.Author;
+        temp.Cover = this.Cover;
+        temp.Description = this.Description;
+        temp.LyWeb = this.LyWeb;
+        temp.SoDuUpdateCatalogUrl = this.SoDuUpdateCatalogUrl;
+        return  temp;
+    }
 }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 
 import com.ruobin.sodu.DBHelper.BookCacheDao;
 import com.ruobin.sodu.Model.Book;
@@ -21,6 +22,10 @@ import com.ruobin.sodu.Util.DividerItemDecoration;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +44,11 @@ public abstract class BaseTabFragment extends Fragment {
     protected View currentView;
 
 
-    private RecyclerView mRecyclerView;
+    public RecyclerView mRecyclerView;
 
     public RefreshLayout refreshLayout;
 
-    private CustomRecyclerAdapter<Book> mAdapter;
+    public CustomRecyclerAdapter<Book> mAdapter;
 
     private int tabId;
     private int listItemId;
@@ -102,7 +107,6 @@ public abstract class BaseTabFragment extends Fragment {
                 refreshLayout.autoRefresh();
             }
         }
-
         dao = new BookCacheDao(getContext());
 
         return currentView;

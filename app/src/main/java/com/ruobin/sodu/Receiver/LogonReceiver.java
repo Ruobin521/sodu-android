@@ -11,7 +11,6 @@ import com.ruobin.sodu.MainActivity;
  */
 public class LogonReceiver extends BroadcastReceiver {
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
 

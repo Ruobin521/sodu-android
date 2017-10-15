@@ -71,6 +71,7 @@ public class ListDataAnalysisService {
                     book.BookName = nameMather.group(3);
                     book.BookId = nameMather.group(2);
                     book.NewestCatalogName = nameMather.group(4);
+                    book.LastReadCatalogName = nameMather.group(4);
                     book.UpdateTime = nameMather.group(5);
                     book.SoDuUpdateCatalogUrl = nameMather.group(1);
 
@@ -140,6 +141,7 @@ public class ListDataAnalysisService {
                     book.BookName = tempM.group(3);
                     book.BookId = tempM.group(2);
                     book.NewestCatalogName = tempM.group(4);
+                    book.LastReadCatalogName = tempM.group(4);
                     book.UpdateTime = tempM.group(5);
                     book.SoDuUpdateCatalogUrl = tempM.group(1);
                     list.add(book);

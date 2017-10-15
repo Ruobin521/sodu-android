@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:background="#99000000"
+    >
+
+    <LinearLayout
+        android:id="@+id/popup_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_book_name"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="这是书名"
+            android:textSize="20sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#22555555"></View>
+
+        <Button
+            android:id="@+id/btn_add_online_shelf"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="0dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/touch_bg"
+            android:text="加入在线书架"
+            android:textColor="@color/item_rank_book_name"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</FrameLayout>

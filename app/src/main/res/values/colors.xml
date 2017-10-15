@@ -28,6 +28,7 @@
     <color name="item_rank_txt_other">#909090</color>
     <color name="item_pressed_color">#d9d9d9</color>
 
+    <color name="btn_transparent_press_back">#22000000</color>
 
 
     <color name="colorPrimary">#007aff</color>

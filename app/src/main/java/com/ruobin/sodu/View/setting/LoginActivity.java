@@ -1,10 +1,12 @@
 package com.ruobin.sodu.View.setting;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -13,9 +15,12 @@ import android.widget.Toast;
 
 import com.ruobin.sodu.Constants.SoDuUrl;
 import com.ruobin.sodu.Interface.IHtmlRequestResult;
+import com.ruobin.sodu.Model.MenuMessageEvent;
 import com.ruobin.sodu.R;
 import com.ruobin.sodu.Service.SettingService;
 import com.ruobin.sodu.Util.HttpHelper;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +59,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+                }
                 onLogin();
             }
         });
@@ -103,16 +112,15 @@ public class LoginActivity extends AppCompatActivity {
         loginMain.setEnabled(true);
 
         if (isSuccess) {
-
             onBackPressed();
 
-            SettingService.putValue(this, SettingService.SettingOption.UserName.name(),info);
-            Intent intent = new Intent();
-            intent.setAction("com.ruobin.login");
-            intent.putExtra("data", "login");
-            this.sendOrderedBroadcast(intent,null);
-
-        } else {
+//            SettingService.putValue(this, SettingService.SettingOption.UserName.name(),info);
+//            Intent intent = new Intent();
+//            intent.setAction("com.ruobin.login");
+//            intent.putExtra("data", "login");
+//            this.sendOrderedBroadcast(intent,null);
+            EventBus.getDefault().post(new MenuMessageEvent(MenuMessageEvent.EventType.Login,null));
+            } else {
 
             Toast.makeText(this, info, Toast.LENGTH_SHORT).show();
         }

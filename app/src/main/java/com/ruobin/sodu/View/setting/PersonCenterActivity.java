@@ -8,8 +8,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ruobin.sodu.Model.MenuMessageEvent;
 import com.ruobin.sodu.R;
 import com.ruobin.sodu.Service.SettingService;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class PersonCenterActivity extends Activity {
 
@@ -44,9 +47,12 @@ public class PersonCenterActivity extends Activity {
 
     private void onLogout() {
         onBackPressed();
-        Intent intent = new Intent();
-        intent.setAction("com.ruobin.login");
-        intent.putExtra("data", "logout");
-        this.sendOrderedBroadcast(intent, null);
+//        Intent intent = new Intent();
+//        intent.setAction("com.ruobin.login");
+//        intent.putExtra("data", "logout");
+//        this.sendOrderedBroadcast(intent, null);
+
+        EventBus.getDefault().post(new MenuMessageEvent(MenuMessageEvent.EventType.Logout,null));
+
     }
 }
