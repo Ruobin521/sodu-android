@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -106,6 +107,10 @@ public class Tab_LocalShelf extends BaseTabFragment {
 
     @Override
     public void itemInitData(View view, Object item) {
+        Book book  = (Book)item;
+        if(book == null){
+            return;
+        }
         TextView tv = (TextView) view.findViewById(R.id.item_local_book_name);
         tv.setText(((Book) item).BookName);
 
@@ -114,6 +119,9 @@ public class Tab_LocalShelf extends BaseTabFragment {
 
         TextView tv3 = (TextView) view.findViewById(R.id.item_local_old_chapter_name);
         tv3.setText(((Book) item).LastReadCatalogName);
+
+        ImageView img = (ImageView)view.findViewById(R.id.item_local_img_new);
+        img.setVisibility(book.IsNew ? View.VISIBLE :View.GONE);
     }
 
 }

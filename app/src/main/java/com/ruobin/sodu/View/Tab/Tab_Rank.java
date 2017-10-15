@@ -103,8 +103,8 @@ public class Tab_Rank extends BaseTabFragment {
 
     @Override
     public void updateUI() {
-        TextView tx = (TextView) this.getView().findViewById(R.id.tab_rank_title);
 
+        TextView tx = (TextView) currentView.findViewById(R.id.tab_rank_title);
         StringBuilder stringBuilder = new StringBuilder("排行榜")
                 .append("-")
                 .append(pageIndex)

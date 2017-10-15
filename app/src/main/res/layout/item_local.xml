@@ -62,7 +62,7 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/item_online_img_new"
+                android:id="@+id/item_local_img_new"
                 android:layout_width="35dp"
                 android:layout_height="25dp"
                 android:layout_alignParentTop="true"

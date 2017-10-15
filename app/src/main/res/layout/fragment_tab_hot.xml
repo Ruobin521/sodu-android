@@ -20,11 +20,13 @@
 
         <ImageButton
             android:id="@+id/btn_search"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/search"
+            android:background="@drawable/btn_trans_bg"
+            android:src="@drawable/search"
+            android:padding="11dp"
+            android:scaleType="fitXY"
             />
     </FrameLayout>
 

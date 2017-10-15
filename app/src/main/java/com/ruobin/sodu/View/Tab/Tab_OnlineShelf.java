@@ -54,6 +54,7 @@ public class Tab_OnlineShelf extends BaseTabFragment {
 
     @Override
     public void initUI() {
+        super.initUI();
         Button btn = (Button)currentView.findViewById(R.id.btn_set_all_had_read);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +62,6 @@ public class Tab_OnlineShelf extends BaseTabFragment {
                 setAllBookHadRead();
             }
         });
-
     }
 
     private Activity getActityty() {
