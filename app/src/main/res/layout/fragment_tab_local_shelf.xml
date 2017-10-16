@@ -10,6 +10,19 @@
         android:layout_height="@dimen/nav_bar_height"
         android:background="@color/tabTextHighLight">
 
+        <Button
+            android:id="@+id/btn_local_shelf_all_update"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/btn_trans_bg"
+            android:gravity="center_vertical"
+            android:text="全部更新"
+            android:textColor="#fff"
+            android:textSize="17sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

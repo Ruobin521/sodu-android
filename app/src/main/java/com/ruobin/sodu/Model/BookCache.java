@@ -24,10 +24,13 @@ public class BookCache {
     @DatabaseField
     public int cacheType;
 
+    public long time;
+
     public BookCache(Book book, int type) {
         bookId = book.BookId;
         cacheType = type;
         bookStr = JsonUitl.objectToString(book);
+        time =  System.currentTimeMillis();
     }
 
     public BookCache() {

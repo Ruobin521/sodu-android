@@ -10,6 +10,8 @@ import com.ruobin.sodu.Model.BookCache;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -98,11 +100,27 @@ public class BookCacheDao {
             List<BookCache> caches = bookCacheDaoOpe.queryBuilder().where().eq("cacheType", typeId).query();
 
             if (caches != null && caches.size() > 0) {
-                books = new ArrayList<>();
+
+                Collections.sort(caches,new Comparator() {
+                    @Override
+                    public int compare(Object o1, Object o2) {
+                        if(o1 instanceof BookCache && o2 instanceof BookCache){
+                            BookCache e1 = (BookCache) o1;
+                            BookCache e2 = (BookCache) o2;
+                            return (int)(e1.time - e2.time);
+                        }
+                        throw new ClassCastException("不能转换为Emp类型");
+                    }
+                });
+
+                books = new ArrayList<Book>();
                 for (BookCache cache : caches) {
                     books.add(cache.getBook());
                 }
+
             }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -21,6 +21,8 @@ import com.ruobin.sodu.UpdateCatalogActivity;
 import com.ruobin.sodu.Util.HttpHelper;
 import com.ruobin.sodu.View.MenuPopupWindow;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 

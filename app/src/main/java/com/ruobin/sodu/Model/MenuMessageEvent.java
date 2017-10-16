@@ -11,11 +11,15 @@ public class MenuMessageEvent {
     public static enum EventType {
         Login,
         Logout,
+
         AddOnline,
-        AddLocal,
         SetOnlineHadRead,
         RemoverOnline,
-        RemoveLoacal
+
+        AddLocal,
+        SetLocalHadRead,
+        RemoveLoacal,
+        CheckLocalUpdate
     }
     public Object data;
     public EventType eventType;

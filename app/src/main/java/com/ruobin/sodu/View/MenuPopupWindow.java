@@ -73,6 +73,19 @@ public class MenuPopupWindow extends PopupWindow {
             }
         }
 
+        //添加在线
+        Button btnAdd = (Button) conentView.findViewById(R.id.btn_add_online_shelf);
+        if (btnAdd != null) {
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    EventBus.getDefault().post(new MenuMessageEvent(MenuMessageEvent.EventType.AddOnline,book));
+                    close();
+                }
+            });
+        }
+
+        //移除在线
         Button btnRemove = (Button) conentView.findViewById(R.id.btn_remove);
         if (btnRemove != null) {
             btnRemove.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +97,7 @@ public class MenuPopupWindow extends PopupWindow {
             });
         }
 
+        //移除本地
         Button btnRemoveLocal = (Button) conentView.findViewById(R.id.btn_remove_local);
         if (btnRemoveLocal != null) {
             btnRemoveLocal.setOnClickListener(new View.OnClickListener() {
@@ -95,18 +109,19 @@ public class MenuPopupWindow extends PopupWindow {
             });
         }
 
-
-
-        Button btnAdd = (Button) conentView.findViewById(R.id.btn_add_online_shelf);
-        if (btnAdd != null) {
-            btnAdd.setOnClickListener(new View.OnClickListener() {
+        //本地更新
+        Button btnUpdateLocal = (Button) conentView.findViewById(R.id.btn_check_update);
+        if (btnUpdateLocal != null) {
+            btnUpdateLocal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    EventBus.getDefault().post(new MenuMessageEvent(MenuMessageEvent.EventType.AddOnline,book));
+                    EventBus.getDefault().post(new MenuMessageEvent(MenuMessageEvent.EventType.CheckLocalUpdate,book));
                     close();
                 }
             });
         }
+
+
 
         TextView txtBookName = (TextView) conentView.findViewById(R.id.menu_book_name);
         txtBookName.setText(book.BookName);
