@@ -19,7 +19,8 @@ public class MenuMessageEvent {
         AddLocal,
         SetLocalHadRead,
         RemoveLoacal,
-        CheckLocalUpdate
+        CheckLocalUpdate,
+        ShowReaderMenu
     }
     public Object data;
     public EventType eventType;

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.os.Handler;
@@ -15,6 +17,12 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import com.ruobin.sodu.Model.MenuMessageEvent;
+import com.ruobin.sodu.Model.MenuMessageEvent.EventType;
+import com.ruobin.sodu.Util.MyUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,22 +37,22 @@ public class ScanView extends RelativeLayout {
     // 滑动的时候存在两页可滑动，要判断是哪一页在滑动
     private boolean isPreMoving = true, isCurrMoving = true;
     // 当前是第几页
-    private int index;
+    public int index;
     private float lastX;
     // 前一页，当前页，下一页的左边位置
     private int prePageLeft = 0, currPageLeft = 0, nextPageLeft = 0;
     // 三张页面
     private View prePage, currPage, nextPage;
     // 页面状态
-    private static final int STATE_MOVE = 0;
-    private static final int STATE_STOP = 1;
+    public static final int STATE_MOVE = 0;
+    public static final int STATE_STOP = 1;
 
 
     // 滑动的页面，只有前一页和当前页可滑
     private static final int PRE = 2;
     private static final int CURR = 3;
 
-    private int state = STATE_STOP;
+    public int state = STATE_STOP;
 
 
     // 正在滑动的页面右边位置，用于绘制阴影
@@ -87,6 +95,9 @@ public class ScanView extends RelativeLayout {
         addView(nextPage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
         adapter.addContent(nextPage, index + 1);
+
+
+
     }
 
     /**
@@ -248,10 +259,11 @@ public class ScanView extends RelativeLayout {
         isCurrMoving = true;
     }
 
+
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
 
-        boolean reslut = true;
         if (adapter != null)
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
@@ -342,13 +354,12 @@ public class ScanView extends RelativeLayout {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    reslut =  false;
                     break;
                 default:
                     break;
             }
         super.dispatchTouchEvent(event);
-        return reslut;
+        return true;
     }
 
     /*
