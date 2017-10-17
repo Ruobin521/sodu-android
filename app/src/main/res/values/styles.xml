@@ -8,8 +8,9 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:listDivider">@drawable/divider_bg</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
-
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
+
 
 
     <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
@@ -21,6 +22,11 @@
     <style name="MyEditText" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/transparent</item>
         <item name="colorControlActivated">@color/transparent</item>
+    </style>
+
+    <style name="AppTheme.NoBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>

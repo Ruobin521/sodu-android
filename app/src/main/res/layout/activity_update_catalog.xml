@@ -3,73 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ruobin.sodu.UpdateCatalogActivity"
-    android:background="@color/main_back_color"
-    android:orientation="vertical">
+    android:background="@color/light_blue"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.ruobin.sodu.UpdateCatalogActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/tabTextHighLight"
-        >
-        <LinearLayout
-            android:id="@+id/navigation_bar_back"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentLeft="true"
-            android:clickable="true"
-            android:focusable="true">
+        android:layout_height="match_parent"
+        android:background="@color/main_back_color"
+        android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="16dp"
-                android:clickable="false"
-                android:layout_height="wrap_content"
-                android:src="@drawable/navigationbar_back_white" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="返回"
-                android:clickable="false"
-                android:textColor="@color/white"
-                android:textSize="19sp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_toEndOf="@+id/navigation_bar_back"
-            android:layout_toStartOf="@+id/navigation_bar_back2"
-            android:id="@+id/header_title"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal"
-            android:textColor="#fff"
-            android:text="小说名称"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:layout_marginLeft="-10dp"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:clickable="true"
-            android:textSize="@dimen/nav_bar_text_size"
-            />
+            android:layout_height="50dp"
+            android:background="@color/tabTextHighLight">
 
-        <LinearLayout
-            android:id="@+id/navigation_bar_back2"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="0dp"
-            android:layout_alignParentRight="true"
-            android:clickable="true"
-            android:focusable="false"
-            android:orientation="horizontal"
-            >
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/navigation_bar_back"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:focusable="true">
 
-    </RelativeLayout>
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:src="@drawable/navigationbar_back_white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="false"
+                    android:text="返回"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/header_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="-10dp"
+                android:layout_toEndOf="@+id/navigation_bar_back"
+                android:layout_toStartOf="@+id/navigation_bar_back2"
+                android:clickable="true"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="小说名称"
+                android:textColor="#fff"
+                android:textSize="@dimen/nav_bar_text_size" />
+
+            <LinearLayout
+                android:id="@+id/navigation_bar_back2"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="0dp"
+                android:clickable="true"
+                android:focusable="false"
+                android:orientation="horizontal"></LinearLayout>
+
+        </RelativeLayout>
+
+        <include layout="@layout/refresh_recycler_view" />
+    </LinearLayout>
 
 
-
-    <include layout="@layout/refresh_recycler_view" />
 </LinearLayout>

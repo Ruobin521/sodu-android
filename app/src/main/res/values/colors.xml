@@ -30,8 +30,16 @@
 
     <color name="btn_transparent_press_back">#22000000</color>
 
+    <color name="btn_reader_press_back">#000</color>
+
+
 
     <color name="colorPrimary">#007aff</color>
     <color name="colorPrimaryDark">#007aff</color>
     <color name="colorAccent">#FF4081</color>
+
+
+
+    <color name="reader_page_setting_text_clor">#FFADADAD</color>
+
 </resources>

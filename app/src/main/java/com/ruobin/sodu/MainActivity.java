@@ -39,12 +39,6 @@ public class MainActivity extends FragmentActivity {
     private FragmentStatePagerAdapter mAdapter;
     private List<Fragment> mFragments = new ArrayList<Fragment>();
 
-//    private LinearLayout mTabBtnOnlineShelf;
-//    private LinearLayout mTabBtnRank;
-//    private LinearLayout mTabBtnHot;
-//    private LinearLayout mTabBtnLocalShelf;
-//    private LinearLayout mTabBtnSetting;
-
     private List<TabEntity> tabs = new ArrayList<TabEntity>();
 
     @Override

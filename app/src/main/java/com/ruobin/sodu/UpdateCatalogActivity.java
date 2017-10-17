@@ -17,6 +17,7 @@ import com.ruobin.sodu.Service.ListDataAnalysisService;
 import com.ruobin.sodu.Util.CustomRecyclerAdapter;
 import com.ruobin.sodu.Util.DividerItemDecoration;
 import com.ruobin.sodu.Util.HttpHelper;
+import com.ruobin.sodu.View.PageReader.PageReaderActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -219,25 +220,17 @@ public class UpdateCatalogActivity extends Activity {
     }
 
     public void itemClick(View view, int position) {
-//        // Toast.makeText(getActivity(), "click " + position + " item", Toast.LENGTH_SHORT).show();
-//        Book book = books.get(position);
-//
-//        Intent intent = new Intent();
-//        //设置Intent的class属性，跳转到SecondActivity
-//        intent.setClass(this, UpdateCatalogActivity.class);
-//        //为intent添加额外的信息
-//        intent.putExtra("book", book);
-//        //启动Activity
-//        // startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this.getActivity()).toBundle());
-//        startActivity(intent);
-//        // ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(this.getActivity(), R.anim.slide_in_right, R.anim.animo_no);
-//        // ActivityCompat.startActivity(this.getActivity(),intent, compat.toBundle());
-
+        Book book = books.get(position);
+        Intent intent = new Intent();
+        intent.setClass(this, PageReaderActivity.class);
+        intent.putExtra("book", book);
+        startActivity(intent);
     }
 
 
     public void itemLongClick(View view, int position) {
-        Toast.makeText(this, "long click " + position + " item", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "long click " + position + " item", Toast.LENGTH_SHORT).show();
+        return;
     }
 
 

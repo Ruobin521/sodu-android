@@ -5,8 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/login_main"
+    android:background="@color/light_blue"
+    android:fitsSystemWindows="true"
     >
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back_color">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -117,6 +122,8 @@
         android:text="注销登录"
         android:textColor="@color/white"
         android:textSize="19sp" />
+</FrameLayout>
+
 
 </FrameLayout>
 

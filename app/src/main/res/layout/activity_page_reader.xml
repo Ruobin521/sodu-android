@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context="com.ruobin.sodu.View.PageReader.PageReaderActivity"
+    android:id="@+id/reader_frame"
+    android:clickable="true"
+    android:fitsSystemWindows="false"
+    android:background="@color/transparent"
+    >
+
+    <com.ruobin.sodu.View.PageReader.ScanView
+        android:id="@+id/scanview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+
+    <FrameLayout
+        android:id="@+id/reader_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:paddingTop="20dp"
+        android:background="#FF191919"
+        android:visibility="gone"
+       >
+
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_reader_setting_bg"
+            android:src="@drawable/navigationbar_back_white"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:scaleType="fitXY"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="这是书名"
+            android:textColor="#fff"
+            android:textSize="20dp"/>
+    </FrameLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/reader_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_height="50dp"
+        android:background="#FF191919"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:clickable="true"
+                android:id="@+id/id_tab_bottom_onlineShelf"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:descendantFocusability="beforeDescendants"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/btn_reader_setting_bg">
+
+                <ImageButton
+                    android:id="@+id/btn_reader_moonlight"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/reader_bar_moonlight"
+                    android:clickable="false"
+                    android:layout_marginBottom="3dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_tab_bottom_onlineshelf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/reader_page_setting_text_clor"
+                    android:textSize="@dimen/tabbar_text_size"
+                    android:text="夜间" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:clickable="true"
+                android:id="@+id/btn_reader_catalog"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:descendantFocusability="beforeDescendants"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/btn_reader_setting_bg">
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/reader_bar_mulu"
+                    android:clickable="false"
+                    android:layout_marginBottom="3dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/reader_page_setting_text_clor"
+                    android:textSize="@dimen/tabbar_text_size"
+                    android:text="目录" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:clickable="true"
+                android:id="@+id/btn_reader_download"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:descendantFocusability="beforeDescendants"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/btn_reader_setting_bg">
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/reader_bar_download"
+                    android:clickable="false"
+                    android:layout_marginBottom="3dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/reader_page_setting_text_clor"
+                    android:textSize="@dimen/tabbar_text_size"
+                    android:text="缓存" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:clickable="true"
+                android:id="@+id/btn_reader_setting"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:descendantFocusability="beforeDescendants"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/btn_reader_setting_bg">
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/reader_bar_setting"
+                    android:clickable="false"
+                    android:layout_marginBottom="3dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设置"
+                    android:textColor="@color/reader_page_setting_text_clor"
+                    android:textSize="@dimen/tabbar_text_size" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>

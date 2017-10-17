@@ -29,5 +29,8 @@
     <dimen name="setting_arrow_height">28dp</dimen>
     <dimen name="setting_arrow_width">28dp</dimen>
 
+    <dimen name="reader_bottom_bar_height">50dp</dimen>
+
+
 
 </resources>

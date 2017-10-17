@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/login_main"
+    android:background="@color/light_blue"
+    android:fitsSystemWindows="true"
     >
 
     <LinearLayout

@@ -31,6 +31,7 @@ public abstract class BaseListViewActivity extends Activity {
     public int  itemLayoutId ;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
