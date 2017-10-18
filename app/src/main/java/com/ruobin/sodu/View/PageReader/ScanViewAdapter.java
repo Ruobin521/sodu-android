@@ -35,6 +35,7 @@ public class ScanViewAdapter extends PageAdapter {
         return items.size();
     }
 
+
     public View getView() {
         View view = LayoutInflater.from(context).inflate(R.layout.page_layout,
                 null);

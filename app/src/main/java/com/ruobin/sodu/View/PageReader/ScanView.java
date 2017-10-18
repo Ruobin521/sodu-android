@@ -78,6 +78,8 @@ public class ScanView extends RelativeLayout {
      */
     private int mEvents;
 
+    public boolean isShowMenu;
+
     public void setAdapter(ScanViewAdapter adapter) {
         removeAllViews();
         this.adapter = adapter;
@@ -263,6 +265,11 @@ public class ScanView extends RelativeLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
+
+        if(isShowMenu){
+            super.dispatchTouchEvent(event);
+            return true;
+        }
 
         if (adapter != null)
             switch (event.getActionMasked()) {

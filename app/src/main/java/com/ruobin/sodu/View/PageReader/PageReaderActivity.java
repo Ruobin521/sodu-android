@@ -30,13 +30,23 @@ public class PageReaderActivity extends AppCompatActivity {
 
     boolean isShwoMenu = false;
 
+    private int downX = 0;
+    private int downY = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_reader);
         setStatusBarVisiablity(false);
-    ///   EventBus.getDefault().register(this);
+        ///   EventBus.getDefault().register(this);
         initView();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setStatusBarVisiablity(isShwoMenu);
     }
 
     private void initView() {
@@ -48,48 +58,47 @@ public class PageReaderActivity extends AppCompatActivity {
         adapter = new ScanViewAdapter(this, items);
         scanview.setAdapter(adapter);
 
-//        View view = (ScanView) findViewById(R.id.scanview);
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                setMenuVisiablity();
-//            }
-//        });
+
         scanview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() != MotionEvent.ACTION_UP){
-                    return  false;
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    downX = (int) event.getX();
+                    downY = (int) event.getY();
                 }
-                if(scanview.state == scanview.STATE_MOVE) {
+
+                if (event.getAction() != MotionEvent.ACTION_UP) {
+                    return false;
+                }
+                if (scanview.state == scanview.STATE_MOVE) {
                     return false;
                 }
                 float screenWidth = MyUtils.getScreenWidth(v.getContext());
                 float screenHeight = MyUtils.getScreenHeight(v.getContext());
-                float x = event.getX();
-                float y = event.getY();
-                if(isShwoMenu){
+
+                if (isShwoMenu) {
                     setMenuVisiablity(false);
-                }else{
-                    if(x>screenWidth/3 &&x<screenWidth*2/3 && y>screenHeight /3 &&y<screenHeight*2/3){
+                } else {
+                    if (downX > screenWidth / 3 && downX < screenWidth * 2 / 3 && downY > screenHeight / 3 && downY < screenHeight * 2 / 3) {
                         setMenuVisiablity(true);
-                    }else{
+                    } else {
 
                     }
                 }
-                return  false;
+                return false;
             }
         });
-
 
     }
 
 
-    private  void setMenuVisiablity(boolean isShow){
+    private void setMenuVisiablity(boolean isShow) {
         setBottomBarVisiablity(isShow);
         setTopBarVisiablity(isShow);
         setStatusBarVisiablity(isShow);
-        isShwoMenu =isShow;
+        isShwoMenu = isShow;
+        scanview.isShowMenu = isShow;
     }
 
     private void setBottomBarVisiablity(final boolean isVisiable) {
@@ -98,12 +107,12 @@ public class PageReaderActivity extends AppCompatActivity {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                  bottomBar.setVisibility(View.VISIBLE);
+                bottomBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                 bottomBar.setVisibility(isVisiable ? View.VISIBLE : View.GONE);
+                bottomBar.setVisibility(isVisiable ? View.VISIBLE : View.GONE);
             }
 
             @Override
@@ -122,7 +131,7 @@ public class PageReaderActivity extends AppCompatActivity {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                  topBar.setVisibility(View.VISIBLE);
+                topBar.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -139,7 +148,38 @@ public class PageReaderActivity extends AppCompatActivity {
     }
 
     private void setStatusBarVisiablity(boolean isVisable) {
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(isVisable ? View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN :View.SYSTEM_UI_FLAG_FULLSCREEN );
+//        View decorView = getWindow().getDecorView();
+//        decorView.setSystemUiVisibility(isVisable ? View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN :View.SYSTEM_UI_FLAG_FULLSCREEN );
+
+        if (isVisable) {
+            showSystemUI();
+        } else {
+            hideSystemUI();
+        }
     }
+
+
+    private void hideSystemUI() {
+        // Set the IMMERSIVE flag.
+        // Set the content to appear under the system bars so that the content
+        // doesn't resize when the system bars hide and show.
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        //  | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
+    }
+
+    private void showSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
+    }
+
 }
