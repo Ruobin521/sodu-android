@@ -17,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.ruobin.sodu.Model.MenuMessageEvent;
 import com.ruobin.sodu.Model.MenuMessageEvent.EventType;
@@ -72,7 +73,7 @@ public class ScanView extends RelativeLayout {
     // 滑动动画的移动速度
     public static final int MOVE_SPEED = 20;
     // 页面适配器
-    private PageAdapter adapter;
+    private ScanViewAdapter adapter;
     /**
      * 过滤多点触碰的控制变量
      */
@@ -86,7 +87,7 @@ public class ScanView extends RelativeLayout {
         prePage = adapter.getView();
         addView(prePage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
-        adapter.addContent(prePage, index - 1);
+        adapter.addContent(prePage,index - 1);
 
         currPage = adapter.getView();
         addView(currPage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -96,10 +97,7 @@ public class ScanView extends RelativeLayout {
         nextPage = adapter.getView();
         addView(nextPage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
-        adapter.addContent(nextPage, index + 1);
-
-
-
+        adapter.addContent(nextPage,index + 1);
     }
 
     /**
@@ -195,7 +193,7 @@ public class ScanView extends RelativeLayout {
             } else if (currPageLeft < 0 && speed >= 0) {
                 // 当前页处于未返回状态
                 moveRight(CURR);
-            } else if (speed < 0 && index < adapter.getCount()) {
+            } else if (speed < 0 && index <= adapter.getCount()) {
                 // 向左翻，翻动的是当前页
                 moveLeft(CURR);
                 if (currPageLeft == (-mWidth)) {
@@ -326,7 +324,7 @@ public class ScanView extends RelativeLayout {
                             && mEvents == 0) {
                         isPreMoving = false;
                         isCurrMoving = true;
-                        if (index == adapter.getCount()) {
+                        if (index == adapter.getCount() && adapter.isLastCatalog()) {
                             // 最后一页不能再往左翻
                             state = STATE_STOP;
                             releaseMoving();

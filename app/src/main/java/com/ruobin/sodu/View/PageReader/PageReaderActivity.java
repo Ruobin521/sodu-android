@@ -1,5 +1,6 @@
 package com.ruobin.sodu.View.PageReader;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -10,8 +11,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ruobin.sodu.Model.Book;
 import com.ruobin.sodu.Model.MenuMessageEvent;
 import com.ruobin.sodu.R;
 import com.ruobin.sodu.Util.MyUtils;
@@ -30,6 +33,8 @@ public class PageReaderActivity extends AppCompatActivity {
 
     boolean isShwoMenu = false;
 
+    private  Book book;
+
     private int downX = 0;
     private int downY = 0;
 
@@ -38,8 +43,13 @@ public class PageReaderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_reader);
         setStatusBarVisiablity(false);
+
+        Intent intent = getIntent();
+        book = (Book) intent.getSerializableExtra("book");
+
         ///   EventBus.getDefault().register(this);
         initView();
+
     }
 
 
@@ -50,12 +60,14 @@ public class PageReaderActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
         scanview = (ScanView) findViewById(R.id.scanview);
-        List<String> items = new ArrayList<String>();
-        for (int i = 0; i < 8; i++)
-            items.add("页面索引" + (i + 1) + "页");
-        adapter = new ScanViewAdapter(this, items);
+
+        TextView txtBookName = (TextView)findViewById(R.id.reader_txt_book_name);
+        txtBookName.setText(book.BookName);
+
+        adapter = new ScanViewAdapter(this, book);
+
+
         scanview.setAdapter(adapter);
 
 
@@ -89,6 +101,8 @@ public class PageReaderActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
 
     }
 

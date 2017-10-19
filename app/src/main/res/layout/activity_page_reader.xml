@@ -12,13 +12,11 @@
     android:fitsSystemWindows="false"
     android:background="@color/transparent"
     >
-
     <com.ruobin.sodu.View.PageReader.ScanView
         android:id="@+id/scanview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true" />
-
 
     <FrameLayout
         android:id="@+id/reader_top_bar"
@@ -45,6 +43,7 @@
             />
 
         <TextView
+            android:id="@+id/reader_txt_book_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -175,10 +174,9 @@
                     android:textColor="@color/reader_page_setting_text_clor"
                     android:textSize="@dimen/tabbar_text_size" />
             </LinearLayout>
-
         </LinearLayout>
-
     </RelativeLayout>
+
 
 
 

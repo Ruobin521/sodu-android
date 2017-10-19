@@ -5,5 +5,10 @@ package com.ruobin.sodu.Model;
  */
 public class BookCatalog {
 
-
+    public int Id;
+    public String BookId;
+    public String CatalogName;
+    public String CatalogUrl;
+    public String CatalogContent;
+    public int Index;
 }
