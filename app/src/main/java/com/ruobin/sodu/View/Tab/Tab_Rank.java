@@ -78,6 +78,10 @@ public class Tab_Rank extends BaseTabFragment {
             public void error() {
                 onRequestFailure();
             }
+            @Override
+            public void end() {
+
+            }
         });
     }
 

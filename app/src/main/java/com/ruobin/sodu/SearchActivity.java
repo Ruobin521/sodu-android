@@ -116,6 +116,11 @@ public class SearchActivity extends BaseListViewActivity {
                 loading.setVisibility(View.GONE);
                 onRequestFailure();
             }
+
+            @Override
+            public void end() {
+
+            }
         });
 
     }

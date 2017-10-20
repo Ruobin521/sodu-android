@@ -44,6 +44,11 @@ public class Tab_Hot extends BaseTabFragment {
             public void error() {
                 onRequestFailure();
             }
+
+            @Override
+            public void end() {
+
+            }
         });
     }
 

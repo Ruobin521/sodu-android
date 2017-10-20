@@ -47,15 +47,15 @@ public class Tab_OnlineShelf extends BaseTabFragment {
         super.onCreate(savedInstanceState);
         super.setId(R.layout.fragment_tab_online_shelf, R.layout.item_online, false, BookCacheDao.BookCacheType.OnlineShelf);
         Instance = this;
-      if(!EventBus.getDefault().isRegistered(this)) {
-          EventBus.getDefault().register(this);
-      }
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
     @Override
     public void initUI() {
         super.initUI();
-        Button btn = (Button)currentView.findViewById(R.id.btn_set_all_had_read);
+        Button btn = (Button) currentView.findViewById(R.id.btn_set_all_had_read);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +81,11 @@ public class Tab_OnlineShelf extends BaseTabFragment {
             @Override
             public void error() {
                 onRequestFailure();
+            }
+
+            @Override
+            public void end() {
+
             }
         });
     }
@@ -156,11 +161,10 @@ public class Tab_OnlineShelf extends BaseTabFragment {
         if (event.eventType == MenuMessageEvent.EventType.SetOnlineHadRead) {
             Book book = (Book) event.data;
             setBookHadRead(book);
-        } else    if (event.eventType == MenuMessageEvent.EventType.RemoverOnline) {
+        } else if (event.eventType == MenuMessageEvent.EventType.RemoverOnline) {
             Book book = (Book) event.data;
             removeOnlineItem(book);
-        }
-        else    if (event.eventType == MenuMessageEvent.EventType.AddOnline) {
+        } else if (event.eventType == MenuMessageEvent.EventType.AddOnline) {
             Book book = (Book) event.data;
             addItemToOnline(book);
         }
@@ -173,45 +177,57 @@ public class Tab_OnlineShelf extends BaseTabFragment {
         HttpHelper.getHtmlByUrl(url, new IHtmlRequestResult() {
             @Override
             public void success(String html) {
-                if(html.contains("取消收藏成功")){
+                if (html.contains("取消收藏成功")) {
                     setLoadingIndicatorViewVisiablity(false);
                     mAdapter.deleteItem(book);
-                    dao.deleteBookByTypeAndId(BookCacheDao.BookCacheType.OnlineShelf,book.BookId);
+                    dao.deleteBookByTypeAndId(BookCacheDao.BookCacheType.OnlineShelf, book.BookId);
                     updatePageTitle();
-                    Toast.makeText(currentView.getContext(),book.BookName+"取消收藏成功",Toast.LENGTH_SHORT).show();
-                }else{
+                    Toast.makeText(currentView.getContext(), book.BookName + "取消收藏成功", Toast.LENGTH_SHORT).show();
+                } else {
                     error();
                 }
             }
+
             @Override
             public void error() {
                 setLoadingIndicatorViewVisiablity(true);
-                Toast.makeText(currentView.getContext(),book.BookName+"取消收藏失败，请重试",Toast.LENGTH_SHORT).show();
+                Toast.makeText(currentView.getContext(), book.BookName + "取消收藏失败，请重试", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void end() {
+
             }
         });
     }
 
     private void addItemToOnline(Book book) {
         setLoadingIndicatorViewVisiablity(true);
-        final Book temp  = book.clone();
+        final Book temp = book.clone();
         String url = SoDuUrl.addToShelfPage + book.BookId;
         HttpHelper.getHtmlByUrl(url, new IHtmlRequestResult() {
             @Override
             public void success(String html) {
-                if((html.contains("{\"success\":true}"))){
+                if ((html.contains("{\"success\":true}"))) {
                     setLoadingIndicatorViewVisiablity(false);
                     mAdapter.addNewItem(temp);
-                    dao.insertOrUpdate(BookCacheDao.BookCacheType.OnlineShelf,temp);
+                    dao.insertOrUpdate(BookCacheDao.BookCacheType.OnlineShelf, temp);
                     updatePageTitle();
-                    Toast.makeText(currentView.getContext(),temp.BookName+"添加成功",Toast.LENGTH_SHORT).show();
-                }else{
+                    Toast.makeText(currentView.getContext(), temp.BookName + "添加成功", Toast.LENGTH_SHORT).show();
+                } else {
                     error();
                 }
             }
+
             @Override
             public void error() {
                 setLoadingIndicatorViewVisiablity(true);
-                Toast.makeText(currentView.getContext(),temp.BookName+"添加至在线书架失败，请重试",Toast.LENGTH_SHORT).show();
+                Toast.makeText(currentView.getContext(), temp.BookName + "添加至在线书架失败，请重试", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void end() {
+
             }
         });
     }
@@ -219,13 +235,13 @@ public class Tab_OnlineShelf extends BaseTabFragment {
     private void setBookHadRead(Book book) {
         book.IsNew = false;
         book.LastReadCatalogName = book.NewestCatalogName;
-        dao.insertOrUpdate( BookCacheDao.BookCacheType.OnlineShelf,book);
+        dao.insertOrUpdate(BookCacheDao.BookCacheType.OnlineShelf, book);
         mAdapter.upddateItem(book);
     }
 
-    private  void setAllBookHadRead(){
-        for(Book b : books) {
-            if(b.IsNew) {
+    private void setAllBookHadRead() {
+        for (Book b : books) {
+            if (b.IsNew) {
                 setBookHadRead(b);
             }
         }
@@ -233,6 +249,10 @@ public class Tab_OnlineShelf extends BaseTabFragment {
 
     @Override
     public void itemClick(View view, int position) {
+
+        if (books == null || books.size() <= 0) {
+            return;
+        }
         // Toast.makeText(getActivity(), "click " + position + " item", Toast.LENGTH_SHORT).show();
         Book book = books.get(position);
         if (book.IsNew) {

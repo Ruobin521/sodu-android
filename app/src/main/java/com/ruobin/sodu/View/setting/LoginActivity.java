@@ -103,6 +103,11 @@ public class LoginActivity extends AppCompatActivity {
             public void error() {
                 onLoginResult(false,"登录失败,请检测网络连接或服务是否正常");
             }
+
+            @Override
+            public void end() {
+
+            }
         });
     }
 

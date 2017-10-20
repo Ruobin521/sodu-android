@@ -3,6 +3,8 @@ package com.ruobin.sodu;
 import android.app.Application;
 import android.content.Context;
 
+import com.ruobin.sodu.Service.SettingService;
+
 /**
  * Created by ruobin on 2017/9/26.
  */
@@ -19,6 +21,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        SettingService.createConfig(this);
     }
 
 }

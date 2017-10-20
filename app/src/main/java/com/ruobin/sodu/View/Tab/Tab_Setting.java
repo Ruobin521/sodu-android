@@ -100,7 +100,7 @@ public class Tab_Setting extends Fragment {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 view.setChecked(isChecked);
-                SettingService.putValue(currentView.getContext(), SettingService.SettingOption.IsAutoAddToOnlineShelf.toString(), isChecked);
+                SettingService.getInstance().putValue(SettingService.SettingOption.IsAutoAddToOnlineShelf.toString(), isChecked);
             }
         });
 
@@ -110,7 +110,7 @@ public class Tab_Setting extends Fragment {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 view.setChecked(isChecked);
-                SettingService.putValue(currentView.getContext(), SettingService.SettingOption.IsDownloadOnWaan.toString(), isChecked);
+                SettingService.getInstance().putValue( SettingService.SettingOption.IsDownloadOnWaan.toString(), isChecked);
             }
         });
 
@@ -139,10 +139,10 @@ public class Tab_Setting extends Fragment {
     private void initSwitchSetting() {
 
         SwitchButton btnOnlineShelf = (SwitchButton) currentView.findViewById(R.id.switch_auto_add_online_shelf);
-        btnOnlineShelf.setChecked(SettingService.getValue(currentView.getContext(), SettingService.SettingOption.IsAutoAddToOnlineShelf.toString(), false));
+        btnOnlineShelf.setChecked(SettingService.getInstance().getValue( SettingService.SettingOption.IsAutoAddToOnlineShelf.toString(), false));
 
         SwitchButton btnDownLoadOnWwan = (SwitchButton) currentView.findViewById(R.id.switch_download_on_wwan);
-        btnDownLoadOnWwan.setChecked(SettingService.getValue(currentView.getContext(), SettingService.SettingOption.IsDownloadOnWaan.toString(), false));
+        btnDownLoadOnWwan.setChecked(SettingService.getInstance().getValue(SettingService.SettingOption.IsDownloadOnWaan.toString(), false));
     }
 
     private void navigateTo(Class t) {

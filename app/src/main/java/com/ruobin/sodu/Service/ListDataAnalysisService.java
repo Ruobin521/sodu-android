@@ -167,9 +167,11 @@ public class ListDataAnalysisService {
                     book.BookId = bookId;
                     book.BookName = bookName;
                     book.NewestCatalogName = tempM.group(2);
+                    book.LastReadCatalogName = tempM.group(2);
                     book.LyWeb = tempM.group(3);
                     book.UpdateTime = tempM.group(4);
                     book.NewestCatalogUrl = tempM.group(1);
+                    book.LastReadCatalogUrl = tempM.group(1);
                     list.add(book);
                 }
             }

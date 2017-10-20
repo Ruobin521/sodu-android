@@ -14,7 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ruobin.sodu.Interface.IHtmlRequestResult;
 import com.ruobin.sodu.Model.Book;
+import com.ruobin.sodu.Model.BookCatalog;
 import com.ruobin.sodu.Model.MenuMessageEvent;
 import com.ruobin.sodu.R;
 import com.ruobin.sodu.Util.MyUtils;
@@ -31,9 +33,13 @@ public class PageReaderActivity extends AppCompatActivity {
     ScanView scanview;
     ScanViewAdapter adapter;
 
+    View topBar;
+    View bottomBar;
+    View addBtn;
+
     boolean isShwoMenu = false;
 
-    private  Book book;
+    private Book book;
 
     private int downX = 0;
     private int downY = 0;
@@ -60,16 +66,21 @@ public class PageReaderActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
+        topBar = findViewById(R.id.reader_top_bar);
+        bottomBar = findViewById(R.id.reader_bottom_bar);
+        addBtn = findViewById(R.id.reader_btn_add);
+
+        topBar.setVisibility(View.GONE);
+        bottomBar.setVisibility(View.GONE);
+        addBtn.setVisibility(View.GONE);
+
         scanview = (ScanView) findViewById(R.id.scanview);
 
-        TextView txtBookName = (TextView)findViewById(R.id.reader_txt_book_name);
+        TextView txtBookName = (TextView) findViewById(R.id.reader_txt_book_name);
         txtBookName.setText(book.BookName);
 
         adapter = new ScanViewAdapter(this, book);
-
-
-        scanview.setAdapter(adapter);
-
 
         scanview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -103,6 +114,24 @@ public class PageReaderActivity extends AppCompatActivity {
         });
 
 
+        adapter.loadCatalogData(adapter.currentCatalog, new IHtmlRequestResult() {
+            @Override
+            public void success(String html) {
+
+                adapter.items = adapter.splitHtmlToPages(adapter.currentCatalog.CatalogUrl, html);
+                scanview.setAdapter(adapter);
+            }
+
+            @Override
+            public void error() {
+
+            }
+
+            @Override
+            public void end() {
+
+            }
+        });
 
     }
 
@@ -113,6 +142,7 @@ public class PageReaderActivity extends AppCompatActivity {
         setStatusBarVisiablity(isShow);
         isShwoMenu = isShow;
         scanview.isShowMenu = isShow;
+        setAddBtnVisiability(isShow);
     }
 
     private void setBottomBarVisiablity(final boolean isVisiable) {
@@ -194,6 +224,12 @@ public class PageReaderActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         );
+    }
+
+    private void setAddBtnVisiability(boolean isVisable) {
+
+        addBtn.setVisibility(isVisable ? View.VISIBLE : View.GONE);
+
     }
 
 }

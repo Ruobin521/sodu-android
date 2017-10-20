@@ -68,7 +68,7 @@ public class HttpHelper {
                         Request request = chain.request()
                                 .newBuilder()
                                 .addHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36")
-                                //  .addHeader("Accept-Encoding", "gzip")
+                              //  .addHeader("Accept-Encoding", "gzip, deflate")
                                 .addHeader("Connection", "keep-alive")
                                 .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
                                 .addHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6")
@@ -83,25 +83,36 @@ public class HttpHelper {
         return httpClient;
     }
 
-    public static void getHtmlByUrl(String url, final IHtmlRequestResult result) {
+    public static void getHtmlByUrl(final String url, final IHtmlRequestResult result) {
 
         HttpHelper.getMethod(url, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
 
-                    String html = response.body().string();
+                   // String html = response.body().string();
+
+                    byte[] b = response.body().bytes(); //获取数据的bytes
+                    String html = new String(b, url.contains("sodu") ? "UTF-8" : "GBK" ); //然后将其转为gb2312
+
                     result.success(html);
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     result.error();
+                }finally {
+                    result.end();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                result.error();
+                try{
+                    result.error();
+                }
+                finally {
+                    result.end();
+                }
             }
         });
     }

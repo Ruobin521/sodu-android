@@ -10,4 +10,6 @@ public interface IHtmlRequestResult {
 
     void error();
 
+    void end();
+
 }

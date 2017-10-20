@@ -263,7 +263,6 @@ public class ScanView extends RelativeLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-
         if(isShowMenu){
             super.dispatchTouchEvent(event);
             return true;
@@ -381,7 +380,7 @@ public class ScanView extends RelativeLayout {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         LinearGradient linearGradient = new LinearGradient(right, 0,
-                right + 36, 0, 0xffbbbbbb, 0x00bbbbbb, Shader.TileMode.CLAMP);
+                right + 2, 0, 0xff777777, 0x00ffffff, Shader.TileMode.CLAMP);
         paint.setShader(linearGradient);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(rectF, paint);

@@ -158,6 +158,11 @@ public class UpdateCatalogActivity extends Activity {
             public void error() {
                 onRequestFailure();
             }
+
+            @Override
+            public void end() {
+
+            }
         });
     }
 

@@ -57,6 +57,11 @@ public class Tab_LocalShelf extends BaseTabFragment {
             public void error() {
                 onRequestFailure();
             }
+
+            @Override
+            public void end() {
+
+            }
         });
     }
 
