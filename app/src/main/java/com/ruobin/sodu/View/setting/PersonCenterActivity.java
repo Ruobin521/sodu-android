@@ -24,7 +24,7 @@ public class PersonCenterActivity extends Activity {
     }
 
     private void initView() {
-        String userName = SettingService.getInstance().getValue(SettingService.SettingOption.UserName.name(), "");
+        String userName = SettingService.getInstance().getValue(SettingService.SettingOption.UserName, "");
         TextView textView = (TextView)findViewById(R.id.txt_login_user);
         textView.setText(userName);
 

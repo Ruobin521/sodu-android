@@ -215,7 +215,7 @@ public class MainActivity extends FragmentActivity {
             } else {
 
                 LogonService.removeCookie();
-                SettingService.getInstance().removeValue(SettingService.SettingOption.UserName.toString());
+                SettingService.getInstance().removeValue(SettingService.SettingOption.UserName);
                 mFragments.remove(0);
                 tabs.remove(0);
                 findViewById(R.id.id_tab_bottom_onlineShelf).setVisibility(View.GONE);

@@ -29,7 +29,7 @@
        >
 
         <ImageButton
-            android:id="@+id/btn_search"
+            android:id="@+id/btn_reader_back"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

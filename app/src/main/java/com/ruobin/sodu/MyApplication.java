@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.ruobin.sodu.Service.SettingService;
+import com.ruobin.sodu.View.PageReader.PageHelper;
 
 /**
  * Created by ruobin on 2017/9/26.
@@ -22,6 +23,7 @@ public class MyApplication extends Application {
         super.onCreate();
         context = getApplicationContext();
         SettingService.createConfig(this);
+        PageHelper.createPageFactory(this);
     }
 
 }

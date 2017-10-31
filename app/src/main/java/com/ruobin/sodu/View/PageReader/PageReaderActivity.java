@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,7 +56,6 @@ public class PageReaderActivity extends AppCompatActivity {
 
         ///   EventBus.getDefault().register(this);
         initView();
-
     }
 
 
@@ -75,12 +75,23 @@ public class PageReaderActivity extends AppCompatActivity {
         bottomBar.setVisibility(View.GONE);
         addBtn.setVisibility(View.GONE);
 
+        ImageButton  btn = (ImageButton)findViewById(R.id.btn_reader_back);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         scanview = (ScanView) findViewById(R.id.scanview);
 
         TextView txtBookName = (TextView) findViewById(R.id.reader_txt_book_name);
         txtBookName.setText(book.BookName);
 
         adapter = new ScanViewAdapter(this, book);
+
+        scanview.setLoadingView(adapter);
 
         scanview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -119,7 +130,7 @@ public class PageReaderActivity extends AppCompatActivity {
             public void success(String html) {
 
                 adapter.items = adapter.splitHtmlToPages(adapter.currentCatalog.CatalogUrl, html);
-                scanview.setAdapter(adapter);
+              scanview.setAdapter(adapter);
             }
 
             @Override

@@ -55,74 +55,74 @@ public class SettingService {
 
 
     public int getFontSize() {
-        return getValue(SettingOption.FontSize.name(), (int) 20);
+        return getValue(SettingOption.FontSize, (int) 20);
     }
 
     public void setFontSize(int fontSize) {
-        putValue(SettingOption.FontSize.name(), fontSize);
+        putValue(SettingOption.FontSize, fontSize);
     }
 
     public int getLineSpace() {
-        return getValue(SettingOption.LineHeight.name(), (int) 20);
+        return getValue(SettingOption.LineHeight, (int) 10);
     }
 
     public void setLineSpace(int fontSize) {
-        putValue(SettingOption.LineHeight.name(), fontSize);
+        putValue(SettingOption.LineHeight, fontSize);
     }
 
 
     public boolean getIsNightMode() {
-        return getValue(SettingOption.IsNightMode.name(), false);
+        return getValue(SettingOption.IsNightMode, false);
     }
 
     public void setIsNightMode(boolean isNightMode) {
-        putValue(SettingOption.IsNightMode.name(), isNightMode);
+        putValue(SettingOption.IsNightMode, isNightMode);
     }
 
 
 
-    public void putValue(String key, int value) {
+    public void putValue(SettingOption key, int value) {
         SharedPreferences.Editor ed = sp.edit();
-        ed.putInt(key, value);
+        ed.putInt(key.name(), value);
         ed.commit();
     }
 
-    public void putValue(String key, boolean value) {
+    public void putValue(SettingOption key, boolean value) {
         SharedPreferences.Editor ed = sp.edit();
-        ed.putBoolean(key, value);
+        ed.putBoolean(key.name(), value);
         ed.commit();
     }
 
-    public void putValue(String key, String value) {
+    public void putValue(SettingOption key, String value) {
         SharedPreferences.Editor ed = sp.edit();
-        ed.putString(key, value);
+        ed.putString(key.name(), value);
         ed.commit();
     }
 
-    public int getValue(String key, int defValue) {
-        int value = sp.getInt(key, defValue);
+    public int getValue(SettingOption key, int defValue) {
+        int value = sp.getInt(key.name(), defValue);
         return value;
     }
 
-    public float getValue(String key, float defValue) {
-        float value = sp.getFloat(key, defValue);
+    public float getValue(SettingOption key, float defValue) {
+        float value = sp.getFloat(key.name(), defValue);
         return value;
     }
 
 
-    public boolean getValue(String key, boolean defValue) {
-        boolean value = sp.getBoolean(key, defValue);
+    public boolean getValue(SettingOption key, boolean defValue) {
+        boolean value = sp.getBoolean(key.name(), defValue);
         return value;
     }
 
-    public String getValue(String key, String defValue) {
-        String value = sp.getString(key, defValue);
+    public String getValue(SettingOption key, String defValue) {
+        String value = sp.getString(key.name(), defValue);
         return value;
     }
 
-    public void removeValue(String key) {
+    public void removeValue(SettingOption key) {
         SharedPreferences.Editor ed = sp.edit();
-        ed.remove(key);
+        ed.remove(key.name());
         ed.commit();
     }
 

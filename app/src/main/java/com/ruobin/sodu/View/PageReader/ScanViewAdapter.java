@@ -3,6 +3,7 @@ package com.ruobin.sodu.View.PageReader;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.ruobin.sodu.Model.BookCatalog;
 import com.ruobin.sodu.R;
 import com.ruobin.sodu.Service.HtmlAnalysisService;
 import com.ruobin.sodu.Util.HttpHelper;
+import com.ruobin.sodu.Util.MyUtils;
 
 import org.w3c.dom.Text;
 
@@ -39,9 +41,15 @@ public class ScanViewAdapter {
 
     Map<String, List<String>> catalogCache;
 
+    private PageHelper pageHelper;
+
+
 
     public ScanViewAdapter(Context context, Book b) {
         this.context = context;
+
+        pageHelper = PageHelper.getInstance();
+
         this.book = b;
         am = context.getAssets();
 
@@ -76,6 +84,11 @@ public class ScanViewAdapter {
     }
 
 
+    public  void setLoadingPage(){
+
+
+    }
+
     public void startLoad() {
         isLoading = true;
     }
@@ -85,8 +98,17 @@ public class ScanViewAdapter {
     }
 
     public void addContent(View view, int position) {
+
         TextView content = (TextView) view.findViewById(R.id.page_content);
         TextView catalog = (TextView) view.findViewById(R.id.page_catalog_name);
+
+
+        float height = content.getMeasuredHeight();
+        float height2 = content.getLineHeight();
+
+        float heith4 = MyUtils.px2dip(this.context,height2);
+        float height3  = content.getLineSpacingExtra();
+
 
         if (position < 1) {
             if (isFirstCatalog()) {
@@ -125,6 +147,13 @@ public class ScanViewAdapter {
         return view;
     }
 
+    public View getLoadingView() {
+        View view = LayoutInflater.from(context).inflate(R.layout.page_layout_loading,
+                null);
+        return view;
+    }
+
+
 
     public boolean isLastCatalog() {
 
@@ -149,14 +178,13 @@ public class ScanViewAdapter {
 
 
     public List<String> splitHtmlToPages(String url, String html) {
-        html = (String) HtmlAnalysisService.analysisHtmlData(url, html, HtmlAnalysisService.AnalisysType.ContentHtml, book.BookName);
 
-        List<String> pages = new ArrayList<String>();
-        for (int i = 0; i < 8; i++)
-            pages.add("页面索引" + (i + 1) + "页" + html);
-
+        List<String> pages =pageHelper.splitHtmlToPages(url,html,book);
         return pages;
     }
+
+
+
 
 
     public void loadCatalogData(BookCatalog catalog, IHtmlRequestResult request) {

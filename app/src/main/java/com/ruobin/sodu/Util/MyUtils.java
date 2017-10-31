@@ -150,9 +150,35 @@ public class MyUtils {
         return (float) (dipValue * scale + 0.5f);
     }
 
+
+
     public static float px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (float) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * 将px值转换为sp值，保证文字大小不变
+     *
+     * @param pxValue
+     *            （DisplayMetrics类中属性scaledDensity）
+     * @return
+     */
+    public static int px2sp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    /**
+     * 将sp值转换为px值，保证文字大小不变
+     *
+     * @param spValue
+     *            （DisplayMetrics类中属性scaledDensity）
+     * @return
+     */
+    public static int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
     }
 
     /**
@@ -333,50 +359,6 @@ public class MyUtils {
         return APIVersion;
     }
 
-    /**
-     *
-     * @param context
-     * @param px
-     * @return
-     */
-    public static float convertPixelsToDp(final Context context, final float px) {
-        return px / context.getResources().getDisplayMetrics().density;
-    }
-
-    /**
-     *
-     * @param context
-     * @param dp
-     * @return
-     */
-    public static float convertDpToPixel(final Context context, final float dp) {
-        return dp * context.getResources().getDisplayMetrics().density;
-    }
-
-    /**
-     * sp转px
-     *
-     * @param context
-     * @param spVal
-     * @return
-     */
-    public static int sp2px(Context context, float spVal)
-    {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-                spVal, context.getResources().getDisplayMetrics());
-    }
-
-    /**
-     * px转sp
-     *
-     * @param context
-     * @param pxVal
-     * @return
-     */
-    public static float px2sp(Context context, float pxVal)
-    {
-        return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
-    }
 
     public static String subString(String text,int num){
         String content = "";

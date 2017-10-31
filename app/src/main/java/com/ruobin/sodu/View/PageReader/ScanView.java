@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.ruobin.sodu.Model.MenuMessageEvent;
 import com.ruobin.sodu.Model.MenuMessageEvent.EventType;
+import com.ruobin.sodu.R;
 import com.ruobin.sodu.Util.MyUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -43,7 +44,7 @@ public class ScanView extends RelativeLayout {
     // 前一页，当前页，下一页的左边位置
     private int prePageLeft = 0, currPageLeft = 0, nextPageLeft = 0;
     // 三张页面
-    private View prePage, currPage, nextPage;
+    private View prePage, currPage, nextPage, loadingPage;
     // 页面状态
     public static final int STATE_MOVE = 0;
     public static final int STATE_STOP = 1;
@@ -80,14 +81,22 @@ public class ScanView extends RelativeLayout {
     private int mEvents;
 
     public boolean isShowMenu;
+    public boolean isLoading;
 
     public void setAdapter(ScanViewAdapter adapter) {
         removeAllViews();
-        this.adapter = adapter;
+
+        isLoading = false;
+
+        if (this.adapter == null) {
+            this.adapter = adapter;
+        }
         prePage = adapter.getView();
+
+
         addView(prePage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
-        adapter.addContent(prePage,index - 1);
+        adapter.addContent(prePage, index - 1);
 
         currPage = adapter.getView();
         addView(currPage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -97,8 +106,28 @@ public class ScanView extends RelativeLayout {
         nextPage = adapter.getView();
         addView(nextPage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
-        adapter.addContent(nextPage,index + 1);
+        adapter.addContent(nextPage, index + 1);
+
     }
+
+    public void setLoadingView(ScanViewAdapter adapter) {
+        isLoading = true;
+
+        removeAllViews();
+        if (this.adapter == null) {
+            this.adapter = adapter;
+        }
+
+        if(loadingPage == null){
+            loadingPage = adapter.getLoadingView();
+        }
+
+
+        addView(loadingPage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT));
+
+    }
+
 
     /**
      * 向左滑。注意可以滑动的页面只有当前页和后一页
@@ -259,11 +288,9 @@ public class ScanView extends RelativeLayout {
         isCurrMoving = true;
     }
 
-
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if(isShowMenu){
+        if (isShowMenu || isLoading) {
             super.dispatchTouchEvent(event);
             return true;
         }
@@ -404,15 +431,30 @@ public class ScanView extends RelativeLayout {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         if (adapter == null)
             return;
-        prePage.layout(prePageLeft, 0,
-                prePageLeft + prePage.getMeasuredWidth(),
-                prePage.getMeasuredHeight());
-        currPage.layout(currPageLeft, 0,
-                currPageLeft + currPage.getMeasuredWidth(),
-                currPage.getMeasuredHeight());
-        nextPage.layout(nextPageLeft, 0,
-                nextPageLeft + nextPage.getMeasuredWidth(),
-                nextPage.getMeasuredHeight());
+
+        if (loadingPage != null) {
+            loadingPage.layout(0, 0, loadingPage.getMeasuredWidth(), loadingPage.getMeasuredHeight());
+        }
+
+
+        if (prePage != null) {
+            prePage.layout(prePageLeft, 0,
+                    prePageLeft + prePage.getMeasuredWidth(),
+                    prePage.getMeasuredHeight());
+        }
+
+        if (currPage != null) {
+            currPage.layout(currPageLeft, 0,
+                    currPageLeft + currPage.getMeasuredWidth(),
+                    currPage.getMeasuredHeight());
+        }
+
+        if (nextPage != null) {
+            nextPage.layout(nextPageLeft, 0,
+                    nextPageLeft + nextPage.getMeasuredWidth(),
+                    nextPage.getMeasuredHeight());
+        }
+
         invalidate();
     }
 

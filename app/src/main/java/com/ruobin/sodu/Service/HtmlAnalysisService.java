@@ -19,7 +19,6 @@ import static com.ruobin.sodu.Service.SoduSourceUrl.*;
 public class HtmlAnalysisService {
 
     public static enum AnalisysType {
-
         ContentHtml,
         CatalogPageHtml,
         CatalogPageUrl,
@@ -37,6 +36,27 @@ public class HtmlAnalysisService {
                 case "www.snwx8.com":
                     if (type == AnalisysType.ContentHtml) {
                         String value = getContentFromHtmlCommon(html, "<div id=\"BookText\">.*?</div>");
+                        return value;
+                    }
+                    if (type == AnalisysType.CatalogPageUrl) {
+
+                        return null;
+                    }
+                    if (type == AnalisysType.CatalogPageHtml) {
+//                    var baseUrl = "http://" + host;
+//                    var value = GetCatalogPageDataCommon(url, baseUrl, html,
+//                            catalogsRegex: "<div id=\"list\">.*?</div>",
+//                        catalogRegex: "<dd><a href=\"(.*?)\".*?>(.*?)</a></dd>",
+//                        introRegex: "<div class=\"intro\">(.*?)</div>",
+//                        coverRegex: "<div id=\"fmimg\">.*?<img.*?src=\"(.*?)\".*?>",
+//                        authorRegex: "<i>作者：(.*?)</i>");
+                        return null;
+                    }
+                    break;
+
+                case "www.sqsxs.com":
+                    if (type == AnalisysType.ContentHtml) {
+                        String value = getContentFromHtmlCommon(html, "<div id=\"content\">.*?</div>");
                         return value;
                     }
                     if (type == AnalisysType.CatalogPageUrl) {
